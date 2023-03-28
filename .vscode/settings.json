@@ -1,0 +1,6 @@
+{
+  "editor.formatOnSave": true,
+  "rubyLsp.rubyVersionManager": "rbenv",
+  "sorbet.enabled": true,
+  "window.title": "${rootName}${separator}${activeEditorMedium} ${dirty}"
+}
