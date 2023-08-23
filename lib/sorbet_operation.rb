@@ -15,8 +15,7 @@ module SorbetOperation
     # Returns the default logger used by operations.
     sig { returns(::Logger) }
     def default_logger
-      @default_logger = T.let(@default_logger, T.nilable(::Logger))
-      @default_logger ||= ::Logger.new($stdout, level: ::Logger::INFO)
+      @default_logger ||= T.let(::Logger.new($stdout, level: ::Logger::INFO), T.nilable(::Logger))
     end
 
     # Sets the default logger used by operations.

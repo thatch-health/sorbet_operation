@@ -95,7 +95,7 @@ module SorbetOperation
     # returns `nil`.
     sig { returns(T.nilable(ValueType)) }
     def safe_unwrap
-      return nil if failure?
+      return if failure?
 
       casted_value
     end

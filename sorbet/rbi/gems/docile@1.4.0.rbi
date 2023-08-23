@@ -43,7 +43,7 @@ module Docile
   # @return [Object] the `dsl` context object after executing the block
   #
   # source://docile//lib/docile.rb#45
-  def dsl_eval(dsl, *args, **_arg2, &block); end
+  def dsl_eval(dsl, *args, &block); end
 
   # Execute a block in the context of an immutable object whose methods,
   # and the methods of their return values, represent the commands in a DSL.
@@ -76,7 +76,7 @@ module Docile
   # @return [Object] the return value of the final command in the block
   #
   # source://docile//lib/docile.rb#128
-  def dsl_eval_immutable(dsl, *args, **_arg2, &block); end
+  def dsl_eval_immutable(dsl, *args, &block); end
 
   # Execute a block in the context of an object whose methods represent the
   # commands in a DSL, and return *the block's return value*.
@@ -111,7 +111,7 @@ module Docile
   # @return [Object] the return value from executing the block
   #
   # source://docile//lib/docile.rb#87
-  def dsl_eval_with_block_return(dsl, *args, **_arg2, &block); end
+  def dsl_eval_with_block_return(dsl, *args, &block); end
 
   class << self
     # Execute a block in the context of an object whose methods represent the
@@ -145,7 +145,7 @@ module Docile
     # @return [Object] the `dsl` context object after executing the block
     #
     # source://docile//lib/docile.rb#45
-    def dsl_eval(dsl, *args, **_arg2, &block); end
+    def dsl_eval(dsl, *args, &block); end
 
     # Execute a block in the context of an immutable object whose methods,
     # and the methods of their return values, represent the commands in a DSL.
@@ -178,7 +178,7 @@ module Docile
     # @return [Object] the return value of the final command in the block
     #
     # source://docile//lib/docile.rb#128
-    def dsl_eval_immutable(dsl, *args, **_arg2, &block); end
+    def dsl_eval_immutable(dsl, *args, &block); end
 
     # Execute a block in the context of an object whose methods represent the
     # commands in a DSL, and return *the block's return value*.
@@ -213,7 +213,7 @@ module Docile
     # @return [Object] the return value from executing the block
     #
     # source://docile//lib/docile.rb#87
-    def dsl_eval_with_block_return(dsl, *args, **_arg2, &block); end
+    def dsl_eval_with_block_return(dsl, *args, &block); end
   end
 end
 
@@ -253,7 +253,7 @@ Docile::BacktraceFilter::FILTER_PATTERN = T.let(T.unsafe(nil), Regexp)
 # @api private
 # @see Docile.dsl_eval_immutable
 #
-# source://docile//lib/docile/chaining_fallback_context_proxy.rb#17
+# source://docile//lib/docile/chaining_fallback_context_proxy.rb#19
 class Docile::ChainingFallbackContextProxy < ::Docile::FallbackContextProxy
   # Proxy methods as in {FallbackContextProxy#method_missing}, replacing
   # `receiver` with the returned value.
@@ -261,7 +261,7 @@ class Docile::ChainingFallbackContextProxy < ::Docile::FallbackContextProxy
   # @api private
   #
   # source://docile//lib/docile/chaining_fallback_context_proxy.rb#20
-  def method_missing(method, *args, **_arg2, &block); end
+  def method_missing(method, *args, &block); end
 end
 
 # A namespace for functions relating to the execution of a block against a
@@ -285,7 +285,7 @@ module Docile::Execution
   # @return [Object] the return value of the block
   #
   # source://docile//lib/docile/execution.rb#19
-  def exec_in_proxy_context(dsl, proxy_type, *args, **_arg3, &block); end
+  def exec_in_proxy_context(dsl, proxy_type, *args, &block); end
 
   class << self
     # Execute a block in the context of an object whose methods represent the
@@ -300,7 +300,7 @@ module Docile::Execution
     # @return [Object] the return value of the block
     #
     # source://docile//lib/docile/execution.rb#19
-    def exec_in_proxy_context(dsl, proxy_type, *args, **_arg3, &block); end
+    def exec_in_proxy_context(dsl, proxy_type, *args, &block); end
   end
 end
 
@@ -342,7 +342,7 @@ class Docile::FallbackContextProxy
   # @api private
   #
   # source://docile//lib/docile/fallback_context_proxy.rb#91
-  def method_missing(method, *args, **_arg2, &block); end
+  def method_missing(method, *args, &block); end
 end
 
 # The set of methods which will **not** fallback from the block's context
