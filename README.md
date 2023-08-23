@@ -1,6 +1,8 @@
 # sorbet_operation
 
 [![Build Status](https://github.com/thatch-health/sorbet_operation/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/thatch-health/sorbet_operation/actions?query=branch%3Amain)
+[![Gem Version ](https://img.shields.io/gem/v/sorbet_operation.svg?style=flat)](https://rubygems.org/gems/sorbet_operation)
+[![YARD Docs](https://img.shields.io/badge/yard-docs-blue?logo=readthedocs)](https://thatch-health.github.io/sorbet_operation/)
 
 sorbet_operation is a minimal operation framework that leverages Sorbet's type system to ensure that operations are well-typed and that their inputs and outputs are well-defined.
 
@@ -55,20 +57,13 @@ Operations return a result object which indicates whether the operation was succ
 
 ## Installation
 
-This gem is not yet published to RubyGems.org. For now, you can install it by adding the following to your `Gemfile`:
-```ruby
-gem "sorbet_operation", github: "thatch-health/sorbet_operation", branch: "main"
-```
-
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
 Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+    $ bundle add sorbet_operation
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+    $ gem install sorbet_operation
 
 ## Usage
 
