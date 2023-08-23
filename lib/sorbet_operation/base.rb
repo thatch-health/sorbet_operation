@@ -80,8 +80,7 @@ module SorbetOperation
     # default logger will be returned instead.
     sig { returns(::Logger) }
     def logger
-      @logger = T.let(@logger, T.nilable(::Logger))
-      @logger ||= SorbetOperation.default_logger
+      @logger ||= T.let(SorbetOperation.default_logger, T.nilable(::Logger))
     end
   end
 end

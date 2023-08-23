@@ -292,7 +292,7 @@ class SimpleCov::ArrayFilter < ::SimpleCov::Filter
   def matches?(source_files_list); end
 end
 
-# source://simplecov//lib/simplecov/filter.rb#69
+# source://simplecov//lib/simplecov/filter.rb#71
 class SimpleCov::BlockFilter < ::SimpleCov::Filter
   # Returns true if the block given when initializing this filter with BlockFilter.new {|src_file| ... }
   # returns true for the given source file.
@@ -1170,8 +1170,8 @@ class SimpleCov::FileList
   # source://simplecov//lib/simplecov/file_list.rb#101
   def branch_covered_percent; end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def count(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def count(*args, &block); end
 
   # source://simplecov//lib/simplecov/file_list.rb#26
   def coverage_statistics; end
@@ -1209,27 +1209,27 @@ class SimpleCov::FileList
   # source://simplecov//lib/simplecov/file_list.rb#82
   def covered_strength; end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def each(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def each(*args, &block); end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def empty?(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def empty?(*args, &block); end
 
   # Finds the least covered file and returns that file's name
   #
   # source://simplecov//lib/simplecov/file_list.rb#65
   def least_covered_file; end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def length(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def length(*args, &block); end
 
   # Returns the overall amount of relevant lines of code across all files in this list
   #
   # source://simplecov//lib/simplecov/file_list.rb#70
   def lines_of_code; end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def map(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def map(*args, &block); end
 
   # Return total count of covered branches
   #
@@ -1246,19 +1246,19 @@ class SimpleCov::FileList
   # source://simplecov//lib/simplecov/file_list.rb#45
   def never_lines; end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def size(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def size(*args, &block); end
 
   # Returns the count of skipped lines
   #
   # source://simplecov//lib/simplecov/file_list.rb#52
   def skipped_lines; end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def to_a(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def to_a(*args, &block); end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def to_ary(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def to_ary(*args, &block); end
 
   # Return total count of branches in all files
   #
@@ -1411,7 +1411,7 @@ SimpleCov::LinesClassifier::WHITESPACE_OR_COMMENT_LINE = T.let(T.unsafe(nil), Re
 #     # SimpleCov configuration here, same as in  SimpleCov.configure
 #   end
 #
-# source://simplecov//lib/simplecov/profiles.rb#11
+# source://simplecov//lib/simplecov/profiles.rb#17
 class SimpleCov::Profiles < ::Hash
   # Define a SimpleCov profile:
   #   SimpleCov.profiles.define 'rails' do
@@ -1427,7 +1427,7 @@ class SimpleCov::Profiles < ::Hash
   def load(name); end
 end
 
-# source://simplecov//lib/simplecov/filter.rb#61
+# source://simplecov//lib/simplecov/filter.rb#63
 class SimpleCov::RegexFilter < ::SimpleCov::Filter
   # Returns true when the given source file's filename matches the
   # regex configured when initializing this Filter with RegexFilter.new(/someregex/)
@@ -1464,26 +1464,26 @@ class SimpleCov::Result
   # source://simplecov//lib/simplecov/result.rb#21
   def command_name=(_arg0); end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def coverage_statistics(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def coverage_statistics(*args, &block); end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def coverage_statistics_by_file(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def coverage_statistics_by_file(*args, &block); end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def covered_branches(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def covered_branches(*args, &block); end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def covered_lines(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def covered_lines(*args, &block); end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def covered_percent(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def covered_percent(*args, &block); end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def covered_percentages(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def covered_percentages(*args, &block); end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def covered_strength(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def covered_strength(*args, &block); end
 
   # Defines when this result has been created. Defaults to Time.now
   #
@@ -1515,14 +1515,14 @@ class SimpleCov::Result
   # source://simplecov//lib/simplecov/result.rb#45
   def groups; end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def least_covered_file(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def least_covered_file(*args, &block); end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def missed_branches(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def missed_branches(*args, &block); end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def missed_lines(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def missed_lines(*args, &block); end
 
   # Returns the original Coverage.result used for this instance of SimpleCov::Result
   #
@@ -1539,11 +1539,11 @@ class SimpleCov::Result
   # source://simplecov//lib/simplecov/result.rb#66
   def to_hash; end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def total_branches(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def total_branches(*args, &block); end
 
-  # source://forwardable/1.3.3/forwardable.rb#231
-  def total_lines(*args, **_arg1, &block); end
+  # source://forwardable/1.3.2/forwardable.rb#229
+  def total_lines(*args, &block); end
 
   private
 
@@ -2120,7 +2120,7 @@ SimpleCov::SourceFile::RUBY_FILE_ENCODING_MAGIC_COMMENT_REGEX = T.let(T.unsafe(n
 # source://simplecov//lib/simplecov/source_file.rb#193
 SimpleCov::SourceFile::SHEBANG_REGEX = T.let(T.unsafe(nil), Regexp)
 
-# source://simplecov//lib/simplecov/filter.rb#53
+# source://simplecov//lib/simplecov/filter.rb#55
 class SimpleCov::StringFilter < ::SimpleCov::Filter
   # Returns true when the given source file's filename matches the
   # string configured when initializing this Filter with StringFilter.new('somestring')

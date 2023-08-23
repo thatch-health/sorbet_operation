@@ -78,11 +78,14 @@ class RuboCop::Cop::Performance::ArraySemiInfiniteRangeSlice < ::RuboCop::Cop::B
   def endless_range_slice?(param0 = T.unsafe(nil)); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/array_semi_infinite_range_slice.rb#52
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/array_semi_infinite_range_slice.rb#52
   def on_send(node); end
 
   private
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/array_semi_infinite_range_slice.rb#65
+  # source://rubocop-performance//lib/rubocop/cop/performance/array_semi_infinite_range_slice.rb#66
   def correction(receiver, range_node); end
 end
 
@@ -580,55 +583,62 @@ RuboCop::Cop::Performance::CollectionLiteralInLoop::POST_CONDITION_LOOP_TYPES = 
 
 # Identifies places where `sort { |a, b| a.foo <=> b.foo }`
 # can be replaced by `sort_by(&:foo)`.
-# This cop also checks `max` and `min` methods.
+# This cop also checks `sort!`, `min`, `max` and `minmax` methods.
 #
 # @example
 #   # bad
-#   array.sort { |a, b| a.foo <=> b.foo }
-#   array.max { |a, b| a.foo <=> b.foo }
-#   array.min { |a, b| a.foo <=> b.foo }
-#   array.sort { |a, b| a[:foo] <=> b[:foo] }
+#   array.sort   { |a, b| a.foo <=> b.foo }
+#   array.sort!  { |a, b| a.foo <=> b.foo }
+#   array.max    { |a, b| a.foo <=> b.foo }
+#   array.min    { |a, b| a.foo <=> b.foo }
+#   array.minmax { |a, b| a.foo <=> b.foo }
+#   array.sort   { |a, b| a[:foo] <=> b[:foo] }
 #
 #   # good
 #   array.sort_by(&:foo)
+#   array.sort_by!(&:foo)
 #   array.sort_by { |v| v.foo }
 #   array.sort_by do |var|
 #   var.foo
 #   end
 #   array.max_by(&:foo)
 #   array.min_by(&:foo)
+#   array.minmax_by(&:foo)
 #   array.sort_by { |a| a[:foo] }
 #
-# source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#26
+# source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#30
 class RuboCop::Cop::Performance::CompareWithBlock < ::RuboCop::Cop::Base
   include ::RuboCop::Cop::RangeHelp
   extend ::RuboCop::Cop::AutoCorrector
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#34
+  # source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#41
   def compare?(param0 = T.unsafe(nil)); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#48
+  # source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#55
   def on_block(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#41
+  # source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#48
   def replaceable_body?(param0 = T.unsafe(nil), param1, param2); end
 
   private
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#105
+  # source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#114
   def compare_range(send, node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#84
+  # source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#91
   def message(send, method, var_a, var_b, args); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#69
+  # source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#76
   def slow_compare?(method, args_a, args_b); end
 end
 
-# source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#30
+# source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#34
 RuboCop::Cop::Performance::CompareWithBlock::MSG = T.let(T.unsafe(nil), String)
+
+# source://rubocop-performance//lib/rubocop/cop/performance/compare_with_block.rb#38
+RuboCop::Cop::Performance::CompareWithBlock::REPLACEMENT = T.let(T.unsafe(nil), Hash)
 
 # Identifies places where `Concurrent.monotonic_time`
 # can be replaced by `Process.clock_gettime(Process::CLOCK_MONOTONIC)`.
@@ -692,23 +702,28 @@ RuboCop::Cop::Performance::ConcurrentMonotonicTime::RESTRICT_ON_SEND = T.let(T.u
 class RuboCop::Cop::Performance::ConstantRegexp < ::RuboCop::Cop::Base
   extend ::RuboCop::Cop::AutoCorrector
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/constant_regexp.rb#41
+  # source://rubocop-performance//lib/rubocop/cop/performance/constant_regexp.rb#45
   def on_regexp(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/constant_regexp.rb#55
+  # source://rubocop-performance//lib/rubocop/cop/performance/constant_regexp.rb#59
   def regexp_escape?(param0 = T.unsafe(nil)); end
 
   private
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/constant_regexp.rb#60
+  # source://rubocop-performance//lib/rubocop/cop/performance/constant_regexp.rb#64
   def include_interpolated_const?(node); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/constant_regexp.rb#51
+  # source://rubocop-performance//lib/rubocop/cop/performance/constant_regexp.rb#55
   def within_allowed_assignment?(node); end
+
+  class << self
+    # source://rubocop-performance//lib/rubocop/cop/performance/constant_regexp.rb#41
+    def autocorrect_incompatible_with; end
+  end
 end
 
 # source://rubocop-performance//lib/rubocop/cop/performance/constant_regexp.rb#39
@@ -829,7 +844,10 @@ class RuboCop::Cop::Performance::DeletePrefix < ::RuboCop::Cop::Base
   # source://rubocop-performance//lib/rubocop/cop/performance/delete_prefix.rb#66
   def delete_prefix_candidate?(param0 = T.unsafe(nil)); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/delete_prefix.rb#70
+  # source://rubocop-performance//lib/rubocop/cop/performance/delete_prefix.rb#71
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/delete_prefix.rb#71
   def on_send(node); end
 end
 
@@ -889,7 +907,10 @@ class RuboCop::Cop::Performance::DeleteSuffix < ::RuboCop::Cop::Base
   # source://rubocop-performance//lib/rubocop/cop/performance/delete_suffix.rb#66
   def delete_suffix_candidate?(param0 = T.unsafe(nil)); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/delete_suffix.rb#70
+  # source://rubocop-performance//lib/rubocop/cop/performance/delete_suffix.rb#71
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/delete_suffix.rb#71
   def on_send(node); end
 end
 
@@ -921,60 +942,63 @@ RuboCop::Cop::Performance::DeleteSuffix::RESTRICT_ON_SEND = T.let(T.unsafe(nil),
 #   [].detect { |item| true }
 #   [].reverse.detect { |item| true }
 #
-# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#33
+# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#30
 class RuboCop::Cop::Performance::Detect < ::RuboCop::Cop::Base
   extend ::RuboCop::Cop::AutoCorrector
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#44
+  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#41
   def detect_candidate?(param0 = T.unsafe(nil)); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#53
+  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#50
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#50
   def on_send(node); end
 
   private
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#72
+  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#70
   def accept_first_call?(receiver, body); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#104
+  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#102
   def autocorrect(corrector, node, replacement); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#130
+  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#128
   def lazy?(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#115
+  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#113
   def message_for_method(method, index); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#126
+  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#124
   def preferred_method; end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#81
+  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#79
   def register_offense(node, receiver, second_method, index); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#96
+  # source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#94
   def replacement(method, index); end
 end
 
-# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#36
+# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#33
 RuboCop::Cop::Performance::Detect::CANDIDATE_METHODS = T.let(T.unsafe(nil), Set)
 
-# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#40
+# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#37
 RuboCop::Cop::Performance::Detect::INDEX_MSG = T.let(T.unsafe(nil), String)
 
-# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#41
+# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#38
 RuboCop::Cop::Performance::Detect::INDEX_REVERSE_MSG = T.let(T.unsafe(nil), String)
 
-# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#38
+# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#35
 RuboCop::Cop::Performance::Detect::MSG = T.let(T.unsafe(nil), String)
 
-# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#42
+# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#39
 RuboCop::Cop::Performance::Detect::RESTRICT_ON_SEND = T.let(T.unsafe(nil), Array)
 
-# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#39
+# source://rubocop-performance//lib/rubocop/cop/performance/detect.rb#36
 RuboCop::Cop::Performance::Detect::REVERSE_MSG = T.let(T.unsafe(nil), String)
 
 # Checks for double `#start_with?` or `#end_with?` calls
@@ -1086,6 +1110,9 @@ RuboCop::Cop::Performance::DoubleStartEndWith::MSG = T.let(T.unsafe(nil), String
 class RuboCop::Cop::Performance::EndWith < ::RuboCop::Cop::Base
   include ::RuboCop::Cop::RegexpMetacharacter
   extend ::RuboCop::Cop::AutoCorrector
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/end_with.rb#62
+  def on_csend(node); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/end_with.rb#62
   def on_match_with_lvasgn(node); end
@@ -1218,7 +1245,7 @@ class RuboCop::Cop::Performance::FlatMap < ::RuboCop::Cop::Base
 
   private
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/flat_map.rb#71
+  # source://rubocop-performance//lib/rubocop/cop/performance/flat_map.rb#72
   def autocorrect(corrector, node); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/flat_map.rb#52
@@ -1281,26 +1308,35 @@ class RuboCop::Cop::Performance::InefficientHashSearch < ::RuboCop::Cop::Base
   def inefficient_include?(param0 = T.unsafe(nil)); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#51
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#51
   def on_send(node); end
 
   private
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#89
-  def autocorrect_argument(node); end
+  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#91
+  def correct_argument(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#93
-  def autocorrect_hash_expression(node); end
+  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#99
+  def correct_dot(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#73
-  def autocorrect_method(node); end
+  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#95
+  def correct_hash_expression(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#80
+  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#75
+  def correct_method(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#82
   def current_method(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#69
+  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#67
   def message(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#84
+  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#71
+  def replacement(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/inefficient_hash_search.rb#86
   def use_long_method; end
 end
 
@@ -1399,29 +1435,32 @@ class RuboCop::Cop::Performance::MapCompact < ::RuboCop::Cop::Base
   def map_compact(param0 = T.unsafe(nil)); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/map_compact.rb#53
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/map_compact.rb#53
   def on_send(node); end
 
   private
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/map_compact.rb#93
+  # source://rubocop-performance//lib/rubocop/cop/performance/map_compact.rb#94
   def compact_method_with_final_newline_range(compact_method_range); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/map_compact.rb#89
+  # source://rubocop-performance//lib/rubocop/cop/performance/map_compact.rb#90
   def invoke_method_after_map_compact_on_same_line?(compact_node, chained_method); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/map_compact.rb#85
+  # source://rubocop-performance//lib/rubocop/cop/performance/map_compact.rb#86
   def map_method_and_compact_method_on_same_line?(map_node, compact_node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/map_compact.rb#67
+  # source://rubocop-performance//lib/rubocop/cop/performance/map_compact.rb#68
   def remove_compact_method(corrector, map_node, compact_node, chained_method); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/map_compact.rb#81
+  # source://rubocop-performance//lib/rubocop/cop/performance/map_compact.rb#82
   def use_dot?(node); end
 end
 
@@ -1430,6 +1469,59 @@ RuboCop::Cop::Performance::MapCompact::MSG = T.let(T.unsafe(nil), String)
 
 # source://rubocop-performance//lib/rubocop/cop/performance/map_compact.rb#36
 RuboCop::Cop::Performance::MapCompact::RESTRICT_ON_SEND = T.let(T.unsafe(nil), Array)
+
+# Checks if the map method is used in a chain.
+#
+# Autocorrection is not supported because an appropriate block variable name cannot be determined automatically.
+#
+# [source,ruby]
+# ----
+# class X
+#   def initialize
+#     @@num = 0
+#   end
+#
+#   def foo
+#     @@num += 1
+#     self
+#   end
+#
+#   def bar
+#     @@num * 2
+#   end
+# end
+#
+# [X.new, X.new].map(&:foo).map(&:bar) # => [4, 4]
+# [X.new, X.new].map { |x| x.foo.bar } # => [2, 4]
+# ----
+#
+# @example
+#
+#   # bad
+#   array.map(&:foo).map(&:bar)
+#
+#   # good
+#   array.map { |item| item.foo.bar }
+#
+# source://rubocop-performance//lib/rubocop/cop/performance/map_method_chain.rb#43
+class RuboCop::Cop::Performance::MapMethodChain < ::RuboCop::Cop::Base
+  # source://rubocop-performance//lib/rubocop/cop/performance/map_method_chain.rb#49
+  def block_pass_with_symbol_arg?(param0 = T.unsafe(nil)); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/map_method_chain.rb#53
+  def on_send(node); end
+
+  private
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/map_method_chain.rb#71
+  def find_begin_of_chained_map_method(node, map_args); end
+end
+
+# source://rubocop-performance//lib/rubocop/cop/performance/map_method_chain.rb#46
+RuboCop::Cop::Performance::MapMethodChain::MSG = T.let(T.unsafe(nil), String)
+
+# source://rubocop-performance//lib/rubocop/cop/performance/map_method_chain.rb#47
+RuboCop::Cop::Performance::MapMethodChain::RESTRICT_ON_SEND = T.let(T.unsafe(nil), Array)
 
 # Identifies places where methods are converted to blocks, with the
 # use of `&method`, and passed as arguments to method calls.
@@ -1613,6 +1705,16 @@ RuboCop::Cop::Performance::RedundantBlockCall::YIELD = T.let(T.unsafe(nil), Stri
 # behavior is appropriately overridden in subclass. For example,
 # `Range#===` returns `true` when argument is within the range.
 #
+# This cop has `AllowRegexpMatch` option and it is true by default because
+# `regexp.match?('string')` often used in block changes to the opposite result:
+#
+# [source,ruby]
+# ----
+# [/pattern/].all? { |regexp| regexp.match?('pattern') } # => true
+# [/pattern/].all? { |regexp| regexp =~ 'pattern' }      # => true
+# [/pattern/].all?('pattern')                            # => false
+# ----
+#
 # @example
 #   # bad
 #   items.all? { |item| pattern === item }
@@ -1622,54 +1724,73 @@ RuboCop::Cop::Performance::RedundantBlockCall::YIELD = T.let(T.unsafe(nil), Stri
 #
 #   # good
 #   items.all?(pattern)
+#   items.all?(Klass)
+# @example AllowRegexpMatch: true (default)
 #
-# source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#26
+#   # good
+#   items.all? { |item| item =~ pattern }
+#   items.all? { |item| item.match?(pattern) }
+# @example AllowRegexpMatch: false
+#
+#   # bad
+#   items.all? { |item| item =~ pattern }
+#   items.all? { |item| item.match?(pattern) }
+#
+# source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#49
 class RuboCop::Cop::Performance::RedundantEqualityComparisonBlock < ::RuboCop::Cop::Base
   extend ::RuboCop::Cop::AutoCorrector
   extend ::RuboCop::Cop::TargetRubyVersion
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#38
+  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#62
   def on_block(node); end
 
   private
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#76
+  # @return [Boolean]
+  #
+  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#131
+  def allow_regexp_match?; end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#104
   def new_argument(block_argument, block_body); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#99
+  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#127
   def offense_range(node); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#58
+  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#82
   def one_block_argument?(block_arguments); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#66
+  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#94
   def same_block_argument_and_is_a_argument?(block_body, block_argument); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#90
+  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#118
   def use_block_argument_in_method_argument_of_operand?(block_argument, operand); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#62
+  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#86
   def use_equality_comparison_block?(block_body); end
 end
 
-# source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#35
+# source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#58
 RuboCop::Cop::Performance::RedundantEqualityComparisonBlock::COMPARISON_METHODS = T.let(T.unsafe(nil), Array)
 
-# source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#36
+# source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#60
 RuboCop::Cop::Performance::RedundantEqualityComparisonBlock::IS_A_METHODS = T.let(T.unsafe(nil), Array)
 
-# source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#32
+# source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#55
 RuboCop::Cop::Performance::RedundantEqualityComparisonBlock::MSG = T.let(T.unsafe(nil), String)
 
-# source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#34
+# source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#59
+RuboCop::Cop::Performance::RedundantEqualityComparisonBlock::REGEXP_METHODS = T.let(T.unsafe(nil), Array)
+
+# source://rubocop-performance//lib/rubocop/cop/performance/redundant_equality_comparison_block.rb#57
 RuboCop::Cop::Performance::RedundantEqualityComparisonBlock::TARGET_METHODS = T.let(T.unsafe(nil), Array)
 
 # Identifies the use of `Regexp#match` or `String#match`, which
@@ -1899,6 +2020,9 @@ class RuboCop::Cop::Performance::RedundantSplitRegexpArgument < ::RuboCop::Cop::
   extend ::RuboCop::Cop::AutoCorrector
 
   # source://rubocop-performance//lib/rubocop/cop/performance/redundant_split_regexp_argument.rb#27
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_split_regexp_argument.rb#27
   def on_send(node); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/redundant_split_regexp_argument.rb#23
@@ -1908,10 +2032,10 @@ class RuboCop::Cop::Performance::RedundantSplitRegexpArgument < ::RuboCop::Cop::
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_split_regexp_argument.rb#41
+  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_split_regexp_argument.rb#42
   def determinist_regexp?(regexp_node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_split_regexp_argument.rb#45
+  # source://rubocop-performance//lib/rubocop/cop/performance/redundant_split_regexp_argument.rb#46
   def replacement(regexp_node); end
 end
 
@@ -2103,10 +2227,10 @@ class RuboCop::Cop::Performance::RegexpMatch < ::RuboCop::Cop::Base
   # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#105
   def match_with_lvasgn?(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#138
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#142
   def on_case(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#134
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#138
   def on_if(node); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#123
@@ -2114,56 +2238,61 @@ class RuboCop::Cop::Performance::RegexpMatch < ::RuboCop::Cop::Base
 
   private
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#161
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#165
   def autocorrect(corrector, node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#150
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#154
   def check_condition(cond); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#246
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#250
   def correct_operator(corrector, recv, arg, oper = T.unsafe(nil)); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#271
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#275
   def correction_range(recv, arg); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#217
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#221
   def find_last_match(body, range, scope_root); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#177
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#181
   def last_match_used?(match_node); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#242
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#246
   def match_gvar?(sym); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#173
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#177
   def message(node); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#213
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#217
   def modifier_form?(match_node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#199
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#203
   def next_match_pos(body, match_node_pos, scope_root); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#186
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#190
   def range_to_search_for_last_matches(match_node, body, scope_root); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#255
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#259
   def replace_with_match_predicate_method(corrector, recv, arg, op_range); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#224
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#228
   def scope_body(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#236
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#240
   def scope_root(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#266
+  # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#270
   def swap_receiver_and_arg(corrector, recv, arg); end
+
+  class << self
+    # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#134
+    def autocorrect_incompatible_with; end
+  end
 end
 
 # source://rubocop-performance//lib/rubocop/cop/performance/regexp_match.rb#112
@@ -2201,6 +2330,9 @@ class RuboCop::Cop::Performance::ReverseEach < ::RuboCop::Cop::Base
   extend ::RuboCop::Cop::AutoCorrector
 
   # source://rubocop-performance//lib/rubocop/cop/performance/reverse_each.rb#33
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_each.rb#33
   def on_send(node); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/reverse_each.rb#29
@@ -2208,12 +2340,12 @@ class RuboCop::Cop::Performance::ReverseEach < ::RuboCop::Cop::Base
 
   private
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_each.rb#53
+  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_each.rb#54
   def offense_range(node); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_each.rb#47
+  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_each.rb#48
   def use_return_value?(node); end
 end
 
@@ -2242,6 +2374,9 @@ class RuboCop::Cop::Performance::ReverseFirst < ::RuboCop::Cop::Base
   extend ::RuboCop::Cop::AutoCorrector
 
   # source://rubocop-performance//lib/rubocop/cop/performance/reverse_first.rb#30
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_first.rb#30
   def on_send(node); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/reverse_first.rb#26
@@ -2249,16 +2384,16 @@ class RuboCop::Cop::Performance::ReverseFirst < ::RuboCop::Cop::Base
 
   private
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_first.rb#63
+  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_first.rb#64
   def build_bad_method(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_first.rb#55
+  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_first.rb#56
   def build_good_method(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_first.rb#49
+  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_first.rb#50
   def build_message(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_first.rb#45
+  # source://rubocop-performance//lib/rubocop/cop/performance/reverse_first.rb#46
   def correction_range(receiver, node); end
 end
 
@@ -2289,14 +2424,17 @@ class RuboCop::Cop::Performance::SelectMap < ::RuboCop::Cop::Base
   def bad_method?(param0 = T.unsafe(nil)); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/select_map.rb#31
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/select_map.rb#31
   def on_send(node); end
 
   private
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/select_map.rb#44
+  # source://rubocop-performance//lib/rubocop/cop/performance/select_map.rb#45
   def map_method_candidate(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/select_map.rb#54
+  # source://rubocop-performance//lib/rubocop/cop/performance/select_map.rb#55
   def offense_range(node, map_method); end
 end
 
@@ -2412,7 +2550,10 @@ RuboCop::Cop::Performance::SortReverse::MSG = T.let(T.unsafe(nil), String)
 class RuboCop::Cop::Performance::Squeeze < ::RuboCop::Cop::Base
   extend ::RuboCop::Cop::AutoCorrector
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/squeeze.rb#38
+  # source://rubocop-performance//lib/rubocop/cop/performance/squeeze.rb#39
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/squeeze.rb#39
   def on_send(node); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/squeeze.rb#29
@@ -2422,7 +2563,7 @@ class RuboCop::Cop::Performance::Squeeze < ::RuboCop::Cop::Base
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/squeeze.rb#58
+  # source://rubocop-performance//lib/rubocop/cop/performance/squeeze.rb#61
   def repeating_literal?(regex_str); end
 end
 
@@ -2477,6 +2618,9 @@ class RuboCop::Cop::Performance::StartWith < ::RuboCop::Cop::Base
   extend ::RuboCop::Cop::AutoCorrector
 
   # source://rubocop-performance//lib/rubocop/cop/performance/start_with.rb#62
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/start_with.rb#62
   def on_match_with_lvasgn(node); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/start_with.rb#62
@@ -2515,9 +2659,12 @@ RuboCop::Cop::Performance::StartWith::RESTRICT_ON_SEND = T.let(T.unsafe(nil), Ar
 class RuboCop::Cop::Performance::StringIdentifierArgument < ::RuboCop::Cop::Base
   extend ::RuboCop::Cop::AutoCorrector
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_identifier_argument.rb#46
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_identifier_argument.rb#48
   def on_send(node); end
 end
+
+# source://rubocop-performance//lib/rubocop/cop/performance/string_identifier_argument.rb#30
+RuboCop::Cop::Performance::StringIdentifierArgument::COMMAND_METHODS = T.let(T.unsafe(nil), Array)
 
 # source://rubocop-performance//lib/rubocop/cop/performance/string_identifier_argument.rb#28
 RuboCop::Cop::Performance::StringIdentifierArgument::MSG = T.let(T.unsafe(nil), String)
@@ -2526,7 +2673,7 @@ RuboCop::Cop::Performance::StringIdentifierArgument::MSG = T.let(T.unsafe(nil), 
 # And `attr` may not be used because `Style/Attr` registers an offense.
 # https://github.com/rubocop/rubocop-performance/issues/278
 #
-# source://rubocop-performance//lib/rubocop/cop/performance/string_identifier_argument.rb#33
+# source://rubocop-performance//lib/rubocop/cop/performance/string_identifier_argument.rb#38
 RuboCop::Cop::Performance::StringIdentifierArgument::RESTRICT_ON_SEND = T.let(T.unsafe(nil), Array)
 
 # Identifies unnecessary use of a regex where `String#include?` would suffice.
@@ -2547,10 +2694,13 @@ RuboCop::Cop::Performance::StringIdentifierArgument::RESTRICT_ON_SEND = T.let(T.
 class RuboCop::Cop::Performance::StringInclude < ::RuboCop::Cop::Base
   extend ::RuboCop::Cop::AutoCorrector
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_include.rb#34
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_include.rb#35
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_include.rb#35
   def on_match_with_lvasgn(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_include.rb#34
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_include.rb#35
   def on_send(node); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/string_include.rb#28
@@ -2560,7 +2710,7 @@ class RuboCop::Cop::Performance::StringInclude < ::RuboCop::Cop::Base
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_include.rb#53
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_include.rb#57
   def literal?(regex_str); end
 end
 
@@ -2591,6 +2741,9 @@ class RuboCop::Cop::Performance::StringReplacement < ::RuboCop::Cop::Base
   extend ::RuboCop::Cop::AutoCorrector
 
   # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#37
+  def on_csend(node); end
+
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#37
   def on_send(node); end
 
   # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#31
@@ -2600,45 +2753,45 @@ class RuboCop::Cop::Performance::StringReplacement < ::RuboCop::Cop::Base
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#83
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#84
   def accept_first_param?(first_param); end
 
   # @return [Boolean]
   #
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#78
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#79
   def accept_second_param?(second_param); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#59
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#60
   def autocorrect(corrector, node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#99
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#100
   def first_source(first_param); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#142
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#143
   def message(node, first_source, second_source); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#148
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#149
   def method_suffix(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#48
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#49
   def offense(node, first_param, second_param); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#128
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#129
   def range(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#152
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#153
   def remove_second_param(corrector, node, first_param); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#69
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#70
   def replace_method(corrector, node, first_source, second_source, first_param); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#132
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#133
   def replacement_method(node, first_source, second_source); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#117
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#118
   def source_from_regex_constructor(node); end
 
-  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#110
+  # source://rubocop-performance//lib/rubocop/cop/performance/string_replacement.rb#111
   def source_from_regex_literal(node); end
 end
 
