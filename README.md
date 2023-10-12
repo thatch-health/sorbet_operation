@@ -40,7 +40,7 @@ class UsersController < ApplicationController
       redirect_to user
     else
       error = result.unwrap_error!
-      T.reveal_type(error) # `SorbetOperation::Error`
+      T.reveal_type(error) # `SorbetOperation::Failure`
       render :new, alert: error.message
     end
   end
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 end
 ```
 
-Operations return a result object which indicates whether the operation was successful or not. The result object wraps the return value of the operation if it was successful, or an instance of `SorbetOperation::Error` if it failed.
+Operations return a result object which indicates whether the operation was successful or not. The result object wraps the return value of the operation if it was successful, or an instance of `SorbetOperation::Failure` if it failed.
 
 ## Installation
 
@@ -77,9 +77,9 @@ The `#execute` method does not take any arguments. Most operations require one o
 
 There are two possible outcomes for an operation:
 1. if `#execute` returns an instance of `ValueType`, then the operation result is a success
-2. if `#execute` raises a `SorbetOperation::Error`, then the operation result is a failure
+2. if `#execute` raises a `SorbetOperation::Failure`, then the operation result is a failure
 
-Exceptions that are not an instance of `SorbetOperation::Error` will not be caught by the framework and will be propagated to the operation callsite.
+Exceptions that are not an instance of `SorbetOperation::Failure` will not be caught by the framework and will be propagated to the operation callsite.
 
 ### Using results
 
