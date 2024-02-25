@@ -59,7 +59,7 @@ class BaseTest < Minitest::Test
 
           log_lines = log_buf.string.lines
 
-          assert(log_lines.count >= 2)
+          assert_operator(log_lines.count, :>=, 2)
           assert_equal("Performing operation BaseTest::DivideTwoNumbers", T.must(log_lines.first).chomp)
           assert_equal(
             "Operation BaseTest::DivideTwoNumbers succeeded, return value = 5.0",
@@ -88,10 +88,10 @@ class BaseTest < Minitest::Test
 
           log_lines = log_buf.string.lines
 
-          assert(log_lines.count >= 2)
+          assert_operator(log_lines.count, :>=, 2)
           assert_equal("Performing operation BaseTest::DivideTwoNumbers", T.must(log_lines.first).chomp)
           assert_equal(
-            "Operation BaseTest::DivideTwoNumbers failed, failure = "\
+            "Operation BaseTest::DivideTwoNumbers failed, failure = " \
               "#<SorbetOperation::Failure: Divisor cannot be zero>",
             T.must(log_lines.last).chomp,
           )

@@ -7,6 +7,8 @@ gemspec
 
 gem "rake", "~> 13.0"
 
+gem "bigdecimal" # for Ruby >= 3.4
+
 group :development, :test do
   gem "irb"
 end

@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email = ["sorbet-operation@thatch.ai"]
 
   spec.summary = "Sorbet-powered operation framework."
-  spec.description = "sorbet_operation is a minimal operation framework that leverages Sorbet's type system to "\
+  spec.description = "sorbet_operation is a minimal operation framework that leverages Sorbet's type system to " \
     "ensure that operations are well-typed and that their inputs and outputs are well-defined."
   spec.homepage = "https://github.com/thatch-health/sorbet_operation"
   spec.license = "MIT"
