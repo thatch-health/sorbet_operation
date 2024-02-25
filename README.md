@@ -34,7 +34,7 @@ In a Rails controller, this operation could be used as follows:
 class UsersController < ApplicationController
   def create
     result = CreateUser.new(user_params).perform
-    if operation.success?
+    if result.success?
       user = result.unwrap!
       T.reveal_type(user) # `User`
       redirect_to user
