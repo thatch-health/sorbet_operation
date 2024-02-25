@@ -7,33 +7,6 @@
 # source://rbi//lib/rbi/loc.rb#4
 module RBI; end
 
-# @abstract It cannot be directly instantiated. Subclasses must implement the `abstract` methods below.
-#
-# source://rbi//lib/rbi/parser.rb#133
-class RBI::ASTVisitor
-  abstract!
-
-  # @abstract
-  #
-  # source://rbi//lib/rbi/parser.rb#145
-  sig { abstract.params(node: T.nilable(::AST::Node)).void }
-  def visit(node); end
-
-  # source://rbi//lib/rbi/parser.rb#140
-  sig { params(nodes: T::Array[::AST::Node]).void }
-  def visit_all(nodes); end
-
-  private
-
-  # source://rbi//lib/rbi/parser.rb#155
-  sig { params(node: ::AST::Node).returns(::String) }
-  def parse_expr(node); end
-
-  # source://rbi//lib/rbi/parser.rb#150
-  sig { params(node: ::AST::Node).returns(::String) }
-  def parse_name(node); end
-end
-
 # source://rbi//lib/rbi/model.rb#968
 class RBI::Arg < ::RBI::Node
   # source://rbi//lib/rbi/model.rb#980
@@ -105,11 +78,6 @@ class RBI::Attr < ::RBI::NodeWithComments
   # source://rbi//lib/rbi/model.rb#356
   sig { returns(T::Array[::Symbol]) }
   def names; end
-
-  # @return [Array<Symbol>]
-  #
-  # source://rbi//lib/rbi/model.rb#356
-  def names=(_arg0); end
 
   # source://rbi//lib/rbi/printer.rb#375
   sig { override.returns(T::Boolean) }
@@ -409,32 +377,6 @@ class RBI::Const < ::RBI::NodeWithComments
   #
   # source://rbi//lib/rbi/model.rb#316
   def value; end
-end
-
-# source://rbi//lib/rbi/parser.rb#627
-class RBI::ConstBuilder < ::RBI::ASTVisitor
-  # source://rbi//lib/rbi/parser.rb#634
-  sig { void }
-  def initialize; end
-
-  # source://rbi//lib/rbi/parser.rb#631
-  sig { returns(T::Array[::String]) }
-  def names; end
-
-  # @return [Array<String>]
-  #
-  # source://rbi//lib/rbi/parser.rb#631
-  def names=(_arg0); end
-
-  # source://rbi//lib/rbi/parser.rb#653
-  sig { override.params(node: T.nilable(::AST::Node)).void }
-  def visit(node); end
-
-  class << self
-    # source://rbi//lib/rbi/parser.rb#643
-    sig { params(node: T.nilable(::AST::Node)).returns(T.nilable(::String)) }
-    def visit(node); end
-  end
 end
 
 # source://rbi//lib/rbi/model.rb#816
@@ -866,7 +808,7 @@ end
 
 # source://rbi//lib/rbi/loc.rb#5
 class RBI::Loc
-  # source://rbi//lib/rbi/loc.rb#23
+  # source://rbi//lib/rbi/loc.rb#38
   sig do
     params(
       file: T.nilable(::String),
@@ -880,39 +822,39 @@ class RBI::Loc
 
   # @return [Integer, nil]
   #
-  # source://rbi//lib/rbi/loc.rb#12
+  # source://rbi//lib/rbi/loc.rb#27
   def begin_column; end
 
-  # source://rbi//lib/rbi/loc.rb#12
+  # source://rbi//lib/rbi/loc.rb#27
   sig { returns(T.nilable(::Integer)) }
   def begin_line; end
 
   # @return [Integer, nil]
   #
-  # source://rbi//lib/rbi/loc.rb#12
+  # source://rbi//lib/rbi/loc.rb#27
   def end_column; end
 
   # @return [Integer, nil]
   #
-  # source://rbi//lib/rbi/loc.rb#12
+  # source://rbi//lib/rbi/loc.rb#27
   def end_line; end
 
-  # source://rbi//lib/rbi/loc.rb#9
+  # source://rbi//lib/rbi/loc.rb#24
   sig { returns(T.nilable(::String)) }
   def file; end
 
-  # source://rbi//lib/rbi/loc.rb#37
+  # source://rbi//lib/rbi/loc.rb#56
   sig { returns(T.nilable(::String)) }
   def source; end
 
-  # source://rbi//lib/rbi/loc.rb#32
+  # source://rbi//lib/rbi/loc.rb#47
   sig { returns(::String) }
   def to_s; end
 
   class << self
-    # source://rbi//lib/rbi/parser.rb#748
-    sig { params(file: ::String, ast_loc: T.any(::Parser::Source::Map, ::Parser::Source::Range)).returns(::RBI::Loc) }
-    def from_ast_loc(file, ast_loc); end
+    # source://rbi//lib/rbi/loc.rb#12
+    sig { params(file: ::String, prism_location: ::Prism::Location).returns(::RBI::Loc) }
+    def from_prism(file, prism_location); end
   end
 end
 
@@ -1093,11 +1035,6 @@ class RBI::Mixin < ::RBI::NodeWithComments
   # source://rbi//lib/rbi/model.rb#777
   sig { returns(T::Array[::String]) }
   def names; end
-
-  # @return [Array<String>]
-  #
-  # source://rbi//lib/rbi/model.rb#777
-  def names=(_arg0); end
 end
 
 # source://rbi//lib/rbi/model.rb#190
@@ -1220,6 +1157,10 @@ class RBI::Node
   sig { params(node: ::RBI::Node).void }
   def replace(node); end
 
+  # source://rbi//lib/rbi/rewriters/filter_versions.rb#94
+  sig { params(version: ::Gem::Version).returns(T::Boolean) }
+  def satisfies_version?(version); end
+
   # source://rbi//lib/rbi/printer.rb#162
   sig { params(indent: ::Integer, print_locs: T::Boolean, max_line_length: T.nilable(::Integer)).returns(::String) }
   def string(indent: T.unsafe(nil), print_locs: T.unsafe(nil), max_line_length: T.unsafe(nil)); end
@@ -1255,6 +1196,10 @@ class RBI::NodeWithComments < ::RBI::Node
   # source://rbi//lib/rbi/printer.rb#188
   sig { override.returns(T::Boolean) }
   def oneline?; end
+
+  # source://rbi//lib/rbi/rewriters/filter_versions.rb#104
+  sig { returns(T::Array[::Gem::Requirement]) }
+  def version_requirements; end
 end
 
 # source://rbi//lib/rbi/model.rb#601
@@ -1332,41 +1277,202 @@ end
 
 # source://rbi//lib/rbi/parser.rb#53
 class RBI::Parser
-  # source://rbi//lib/rbi/parser.rb#64
-  sig { void }
-  def initialize; end
-
-  # source://rbi//lib/rbi/parser.rb#101
+  # source://rbi//lib/rbi/parser.rb#88
   sig { params(path: ::String).returns(::RBI::Tree) }
   def parse_file(path); end
 
-  # source://rbi//lib/rbi/parser.rb#96
+  # source://rbi//lib/rbi/parser.rb#83
   sig { params(string: ::String).returns(::RBI::Tree) }
   def parse_string(string); end
 
   private
 
-  # source://rbi//lib/rbi/parser.rb#108
-  sig { params(content: ::String, file: ::String).returns(::RBI::Tree) }
-  def parse(content, file:); end
+  # source://rbi//lib/rbi/parser.rb#95
+  sig { params(source: ::String, file: ::String).returns(::RBI::Tree) }
+  def parse(source, file:); end
 
   class << self
-    # source://rbi//lib/rbi/parser.rb#78
+    # source://rbi//lib/rbi/parser.rb#65
     sig { params(path: ::String).returns(::RBI::Tree) }
     def parse_file(path); end
 
-    # source://rbi//lib/rbi/parser.rb#83
+    # source://rbi//lib/rbi/parser.rb#70
     sig { params(paths: T::Array[::String]).returns(T::Array[::RBI::Tree]) }
     def parse_files(paths); end
 
-    # source://rbi//lib/rbi/parser.rb#73
+    # source://rbi//lib/rbi/parser.rb#60
     sig { params(string: ::String).returns(::RBI::Tree) }
     def parse_string(string); end
 
-    # source://rbi//lib/rbi/parser.rb#89
+    # source://rbi//lib/rbi/parser.rb#76
     sig { params(strings: T::Array[::String]).returns(T::Array[::RBI::Tree]) }
     def parse_strings(strings); end
   end
+end
+
+# source://rbi//lib/rbi/parser.rb#791
+class RBI::Parser::SigBuilder < ::RBI::Parser::Visitor
+  # source://rbi//lib/rbi/parser.rb#798
+  sig { params(content: ::String, file: ::String).void }
+  def initialize(content, file:); end
+
+  # source://rbi//lib/rbi/parser.rb#795
+  sig { returns(::RBI::Sig) }
+  def current; end
+
+  # source://rbi//lib/rbi/parser.rb#850
+  sig { override.params(node: ::Prism::AssocNode).void }
+  def visit_assoc_node(node); end
+
+  # source://rbi//lib/rbi/parser.rb#805
+  sig { override.params(node: ::Prism::CallNode).void }
+  def visit_call_node(node); end
+end
+
+# source://rbi//lib/rbi/parser.rb#153
+class RBI::Parser::TreeBuilder < ::RBI::Parser::Visitor
+  # source://rbi//lib/rbi/parser.rb#163
+  sig { params(source: ::String, comments: T::Array[::Prism::Comment], file: ::String).void }
+  def initialize(source, comments:, file:); end
+
+  # source://rbi//lib/rbi/parser.rb#160
+  sig { returns(T.nilable(::Prism::Node)) }
+  def last_node; end
+
+  # source://rbi//lib/rbi/parser.rb#157
+  sig { returns(::RBI::Tree) }
+  def tree; end
+
+  # source://rbi//lib/rbi/parser.rb#299
+  sig { params(node: ::Prism::CallNode).void }
+  def visit_call_node(node); end
+
+  # source://rbi//lib/rbi/parser.rb#176
+  sig { override.params(node: ::Prism::ClassNode).void }
+  def visit_class_node(node); end
+
+  # source://rbi//lib/rbi/parser.rb#208
+  sig { params(node: T.any(::Prism::ConstantPathWriteNode, ::Prism::ConstantWriteNode)).void }
+  def visit_constant_assign(node); end
+
+  # source://rbi//lib/rbi/parser.rb#201
+  sig { override.params(node: ::Prism::ConstantPathWriteNode).void }
+  def visit_constant_path_write_node(node); end
+
+  # source://rbi//lib/rbi/parser.rb#194
+  sig { override.params(node: ::Prism::ConstantWriteNode).void }
+  def visit_constant_write_node(node); end
+
+  # source://rbi//lib/rbi/parser.rb#241
+  sig { override.params(node: ::Prism::DefNode).void }
+  def visit_def_node(node); end
+
+  # source://rbi//lib/rbi/parser.rb#255
+  sig { override.params(node: ::Prism::ModuleNode).void }
+  def visit_module_node(node); end
+
+  # source://rbi//lib/rbi/parser.rb#272
+  sig { override.params(node: ::Prism::ProgramNode).void }
+  def visit_program_node(node); end
+
+  # source://rbi//lib/rbi/parser.rb#283
+  sig { override.params(node: ::Prism::SingletonClassNode).void }
+  def visit_singleton_class_node(node); end
+
+  private
+
+  # Collect all the remaining comments within a node
+  #
+  # source://rbi//lib/rbi/parser.rb#467
+  sig { params(node: ::Prism::Node).void }
+  def collect_dangling_comments(node); end
+
+  # Collect all the remaining comments after visiting the tree
+  #
+  # source://rbi//lib/rbi/parser.rb#485
+  sig { void }
+  def collect_orphan_comments; end
+
+  # source://rbi//lib/rbi/parser.rb#508
+  sig { returns(::RBI::Tree) }
+  def current_scope; end
+
+  # source://rbi//lib/rbi/parser.rb#513
+  sig { returns(T::Array[::RBI::Sig]) }
+  def current_sigs; end
+
+  # source://rbi//lib/rbi/parser.rb#520
+  sig { returns(T::Array[::RBI::Comment]) }
+  def current_sigs_comments; end
+
+  # source://rbi//lib/rbi/parser.rb#527
+  sig { params(node: ::Prism::Node).returns(T::Array[::RBI::Comment]) }
+  def node_comments(node); end
+
+  # source://rbi//lib/rbi/parser.rb#545
+  sig { params(node: ::Prism::Comment).returns(::RBI::Comment) }
+  def parse_comment(node); end
+
+  # source://rbi//lib/rbi/parser.rb#574
+  sig { params(node: T.nilable(::Prism::Node)).returns(T::Array[::RBI::Param]) }
+  def parse_params(node); end
+
+  # source://rbi//lib/rbi/parser.rb#550
+  sig { params(node: T.nilable(::Prism::Node)).returns(T::Array[::RBI::Arg]) }
+  def parse_send_args(node); end
+
+  # source://rbi//lib/rbi/parser.rb#648
+  sig { params(node: ::Prism::CallNode).returns(::RBI::Sig) }
+  def parse_sig(node); end
+
+  # source://rbi//lib/rbi/parser.rb#658
+  sig do
+    params(
+      node: T.any(::Prism::ConstantPathWriteNode, ::Prism::ConstantWriteNode)
+    ).returns(T.nilable(::RBI::Struct))
+  end
+  def parse_struct(node); end
+
+  # source://rbi//lib/rbi/parser.rb#708
+  sig { params(send: ::Prism::CallNode).void }
+  def parse_tstruct_field(send); end
+
+  # source://rbi//lib/rbi/parser.rb#745
+  sig { params(name: ::String, node: ::Prism::Node).returns(::RBI::Visibility) }
+  def parse_visibility(name, node); end
+
+  # source://rbi//lib/rbi/parser.rb#759
+  sig { void }
+  def separate_header_comments; end
+
+  # source://rbi//lib/rbi/parser.rb#769
+  sig { void }
+  def set_root_tree_loc; end
+
+  # source://rbi//lib/rbi/parser.rb#783
+  sig { params(node: T.nilable(::Prism::Node)).returns(T::Boolean) }
+  def type_variable_definition?(node); end
+end
+
+# source://rbi//lib/rbi/parser.rb#122
+class RBI::Parser::Visitor < ::Prism::Visitor
+  # source://rbi//lib/rbi/parser.rb#126
+  sig { params(source: ::String, file: ::String).void }
+  def initialize(source, file:); end
+
+  private
+
+  # source://rbi//lib/rbi/parser.rb#136
+  sig { params(node: ::Prism::Node).returns(::RBI::Loc) }
+  def node_loc(node); end
+
+  # source://rbi//lib/rbi/parser.rb#141
+  sig { params(node: T.nilable(::Prism::Node)).returns(T.nilable(::String)) }
+  def node_string(node); end
+
+  # source://rbi//lib/rbi/parser.rb#148
+  sig { params(node: ::Prism::Node).returns(::String) }
+  def node_string!(node); end
 end
 
 # source://rbi//lib/rbi/printer.rb#5
@@ -1638,6 +1744,78 @@ class RBI::Rewriters::Deannotate < ::RBI::Visitor
   def deannotate_node(node); end
 end
 
+# Take a gem version and filter out all RBI that is not relevant to that version based on @version annotations
+# in comments. As an example:
+#
+# ~~~rb
+# tree = Parser.parse_string(<<~RBI)
+#   class Foo
+#     # @version > 0.3.0
+#     def bar
+#     end
+#
+#     # @version <= 0.3.0
+#     def bar(arg1)
+#     end
+#   end
+# RBI
+#
+# Rewriters::FilterVersions.filter(tree, Gem::Version.new("0.3.1"))
+#
+# assert_equal(<<~RBI, tree.string)
+#   class Foo
+#     # @version > 0.3.0
+#     def bar
+#     end
+#   end
+# RBI
+# ~~~
+#
+# Supported operators:
+# - equals `=`
+# - not equals `!=`
+# - greater than `>`
+# - greater than or equal to `>=`
+# - less than `<`
+# - less than or equal to `<=`
+# - pessimistic or twiddle-wakka`~>`
+#
+# And/or logic:
+# - "And" logic: put multiple versions on the same line
+#   - e.g. `@version > 0.3.0, <1.0.0` means version must be greater than 0.3.0 AND less than 1.0.0
+# - "Or" logic: put multiple versions on subsequent lines
+#   - e.g. the following means version must be less than 0.3.0 OR greater than 1.0.0
+#       ```
+#       # @version < 0.3.0
+#       # @version > 1.0.0
+#       ```
+# Prerelease versions:
+# - Prerelease versions are considered less than their non-prerelease counterparts
+#   - e.g. `0.4.0-prerelease` is less than `0.4.0`
+#
+# RBI with no versions:
+# - RBI with no version annotations are automatically counted towards ALL versions
+#
+# source://rbi//lib/rbi/rewriters/filter_versions.rb#57
+class RBI::Rewriters::FilterVersions < ::RBI::Visitor
+  # source://rbi//lib/rbi/rewriters/filter_versions.rb#73
+  sig { params(version: ::Gem::Version).void }
+  def initialize(version); end
+
+  # source://rbi//lib/rbi/rewriters/filter_versions.rb#79
+  sig { override.params(node: T.nilable(::RBI::Node)).void }
+  def visit(node); end
+
+  class << self
+    # source://rbi//lib/rbi/rewriters/filter_versions.rb#66
+    sig { params(tree: ::RBI::Tree, version: ::Gem::Version).void }
+    def filter(tree, version); end
+  end
+end
+
+# source://rbi//lib/rbi/rewriters/filter_versions.rb#60
+RBI::Rewriters::FilterVersions::VERSION_PREFIX = T.let(T.unsafe(nil), String)
+
 # source://rbi//lib/rbi/rewriters/group_nodes.rb#6
 class RBI::Rewriters::GroupNodes < ::RBI::Visitor
   # source://rbi//lib/rbi/rewriters/group_nodes.rb#10
@@ -1722,7 +1900,7 @@ class RBI::Rewriters::Merge::Conflict < ::T::Struct
   def to_s; end
 
   class << self
-    # source://sorbet-runtime/0.5.10983/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.11267/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -1939,7 +2117,7 @@ class RBI::Rewriters::RemoveKnownDefinitions::Operation < ::T::Struct
   def to_s; end
 
   class << self
-    # source://sorbet-runtime/0.5.10983/lib/types/struct.rb#13
+    # source://sorbet-runtime/0.5.11267/lib/types/struct.rb#13
     def inherited(s); end
   end
 end
@@ -2221,31 +2399,6 @@ class RBI::Sig < ::RBI::Node
   # source://rbi//lib/rbi/printer.rb#663
   sig { returns(T::Array[::String]) }
   def sig_modifiers; end
-end
-
-# source://rbi//lib/rbi/parser.rb#668
-class RBI::SigBuilder < ::RBI::ASTVisitor
-  # source://rbi//lib/rbi/parser.rb#675
-  sig { void }
-  def initialize; end
-
-  # source://rbi//lib/rbi/parser.rb#672
-  sig { returns(::RBI::Sig) }
-  def current; end
-
-  # source://rbi//lib/rbi/parser.rb#692
-  sig { override.params(node: T.nilable(::AST::Node)).void }
-  def visit(node); end
-
-  # source://rbi//lib/rbi/parser.rb#702
-  sig { params(node: ::AST::Node).void }
-  def visit_send(node); end
-
-  class << self
-    # source://rbi//lib/rbi/parser.rb#684
-    sig { params(node: ::AST::Node).returns(::RBI::Sig) }
-    def build(node); end
-  end
 end
 
 # source://rbi//lib/rbi/model.rb#1098
@@ -2597,7 +2750,7 @@ class RBI::Tree < ::RBI::NodeWithComments
   sig { params(annotation: ::String, annotate_scopes: T::Boolean, annotate_properties: T::Boolean).void }
   def annotate!(annotation, annotate_scopes: T.unsafe(nil), annotate_properties: T.unsafe(nil)); end
 
-  # source://tapioca/0.11.8/lib/tapioca/rbi_ext/model.rb#38
+  # source://tapioca/0.12.0/lib/tapioca/rbi_ext/model.rb#38
   sig do
     params(
       name: ::String,
@@ -2607,19 +2760,19 @@ class RBI::Tree < ::RBI::NodeWithComments
   end
   def create_class(name, superclass_name: T.unsafe(nil), &block); end
 
-  # source://tapioca/0.11.8/lib/tapioca/rbi_ext/model.rb#45
+  # source://tapioca/0.12.0/lib/tapioca/rbi_ext/model.rb#45
   sig { params(name: ::String, value: ::String).void }
   def create_constant(name, value:); end
 
-  # source://tapioca/0.11.8/lib/tapioca/rbi_ext/model.rb#55
+  # source://tapioca/0.12.0/lib/tapioca/rbi_ext/model.rb#55
   sig { params(name: ::String).void }
   def create_extend(name); end
 
-  # source://tapioca/0.11.8/lib/tapioca/rbi_ext/model.rb#50
+  # source://tapioca/0.12.0/lib/tapioca/rbi_ext/model.rb#50
   sig { params(name: ::String).void }
   def create_include(name); end
 
-  # source://tapioca/0.11.8/lib/tapioca/rbi_ext/model.rb#89
+  # source://tapioca/0.12.0/lib/tapioca/rbi_ext/model.rb#89
   sig do
     params(
       name: ::String,
@@ -2632,19 +2785,19 @@ class RBI::Tree < ::RBI::NodeWithComments
   end
   def create_method(name, parameters: T.unsafe(nil), return_type: T.unsafe(nil), class_method: T.unsafe(nil), visibility: T.unsafe(nil), comments: T.unsafe(nil)); end
 
-  # source://tapioca/0.11.8/lib/tapioca/rbi_ext/model.rb#60
+  # source://tapioca/0.12.0/lib/tapioca/rbi_ext/model.rb#60
   sig { params(name: ::String).void }
   def create_mixes_in_class_methods(name); end
 
-  # source://tapioca/0.11.8/lib/tapioca/rbi_ext/model.rb#25
+  # source://tapioca/0.12.0/lib/tapioca/rbi_ext/model.rb#25
   sig { params(name: ::String, block: T.nilable(T.proc.params(scope: ::RBI::Scope).void)).returns(::RBI::Scope) }
   def create_module(name, &block); end
 
-  # source://tapioca/0.11.8/lib/tapioca/rbi_ext/model.rb#9
+  # source://tapioca/0.12.0/lib/tapioca/rbi_ext/model.rb#9
   sig { params(constant: ::Module, block: T.nilable(T.proc.params(scope: ::RBI::Scope).void)).returns(::RBI::Scope) }
   def create_path(constant, &block); end
 
-  # source://tapioca/0.11.8/lib/tapioca/rbi_ext/model.rb#74
+  # source://tapioca/0.12.0/lib/tapioca/rbi_ext/model.rb#74
   sig do
     params(
       name: ::String,
@@ -2664,6 +2817,10 @@ class RBI::Tree < ::RBI::NodeWithComments
   # source://rbi//lib/rbi/model.rb#132
   sig { returns(T::Boolean) }
   def empty?; end
+
+  # source://rbi//lib/rbi/rewriters/filter_versions.rb#118
+  sig { params(version: ::Gem::Version).void }
+  def filter_versions!(version); end
 
   # source://rbi//lib/rbi/rewriters/group_nodes.rb#38
   sig { void }
@@ -2706,136 +2863,13 @@ class RBI::Tree < ::RBI::NodeWithComments
 
   private
 
-  # source://tapioca/0.11.8/lib/tapioca/rbi_ext/model.rb#116
+  # source://tapioca/0.12.0/lib/tapioca/rbi_ext/model.rb#116
   sig { params(node: ::RBI::Node).returns(::RBI::Node) }
   def create_node(node); end
 
-  # source://tapioca/0.11.8/lib/tapioca/rbi_ext/model.rb#111
+  # source://tapioca/0.12.0/lib/tapioca/rbi_ext/model.rb#111
   sig { returns(T::Hash[::String, ::RBI::Node]) }
   def nodes_cache; end
-end
-
-# source://rbi//lib/rbi/parser.rb#160
-class RBI::TreeBuilder < ::RBI::ASTVisitor
-  # source://rbi//lib/rbi/parser.rb#176
-  sig do
-    params(
-      file: ::String,
-      comments: T::Array[::Parser::Source::Comment],
-      nodes_comments_assoc: T::Hash[::Parser::Source::Map, T::Array[::Parser::Source::Comment]]
-    ).void
-  end
-  def initialize(file:, comments: T.unsafe(nil), nodes_comments_assoc: T.unsafe(nil)); end
-
-  # source://rbi//lib/rbi/parser.rb#167
-  sig { returns(T.nilable(::AST::Node)) }
-  def last_node; end
-
-  # source://rbi//lib/rbi/parser.rb#191
-  sig { void }
-  def post_process; end
-
-  # source://rbi//lib/rbi/parser.rb#164
-  sig { returns(::RBI::Tree) }
-  def tree; end
-
-  # source://rbi//lib/rbi/parser.rb#197
-  sig { override.params(node: T.nilable(::Object)).void }
-  def visit(node); end
-
-  private
-
-  # source://rbi//lib/rbi/parser.rb#573
-  sig { void }
-  def assoc_dangling_comments; end
-
-  # source://rbi//lib/rbi/parser.rb#554
-  sig { returns(::RBI::Tree) }
-  def current_scope; end
-
-  # source://rbi//lib/rbi/parser.rb#559
-  sig { returns(T::Array[::RBI::Sig]) }
-  def current_sigs; end
-
-  # source://rbi//lib/rbi/parser.rb#566
-  sig { returns(T::Array[::RBI::Comment]) }
-  def current_sigs_comments; end
-
-  # source://rbi//lib/rbi/parser.rb#542
-  sig { params(node: ::AST::Node).returns(T::Array[::RBI::Comment]) }
-  def node_comments(node); end
-
-  # source://rbi//lib/rbi/parser.rb#537
-  sig { params(node: ::AST::Node).returns(::RBI::Loc) }
-  def node_loc(node); end
-
-  # source://rbi//lib/rbi/parser.rb#410
-  sig { params(node: ::AST::Node).returns(T.nilable(::RBI::Node)) }
-  def parse_block(node); end
-
-  # source://rbi//lib/rbi/parser.rb#254
-  sig { params(node: ::AST::Node).returns(::RBI::Node) }
-  def parse_const_assign(node); end
-
-  # source://rbi//lib/rbi/parser.rb#270
-  sig { params(node: ::AST::Node).returns(::RBI::Method) }
-  def parse_def(node); end
-
-  # source://rbi//lib/rbi/parser.rb#512
-  sig { params(node: ::AST::Node).returns(::RBI::TEnumBlock) }
-  def parse_enum(node); end
-
-  # source://rbi//lib/rbi/parser.rb#297
-  sig { params(node: ::AST::Node).returns(::RBI::Param) }
-  def parse_param(node); end
-
-  # source://rbi//lib/rbi/parser.rb#529
-  sig { params(node: ::AST::Node).returns(::RBI::RequiresAncestor) }
-  def parse_requires_ancestor(node); end
-
-  # source://rbi//lib/rbi/parser.rb#234
-  sig { params(node: ::AST::Node).returns(::RBI::Scope) }
-  def parse_scope(node); end
-
-  # source://rbi//lib/rbi/parser.rb#325
-  sig { params(node: ::AST::Node).returns(T.nilable(::RBI::Node)) }
-  def parse_send(node); end
-
-  # source://rbi//lib/rbi/parser.rb#393
-  sig { params(node: ::AST::Node).returns(T::Array[::RBI::Arg]) }
-  def parse_send_args(node); end
-
-  # source://rbi//lib/rbi/parser.rb#505
-  sig { params(node: ::AST::Node).returns(::RBI::Sig) }
-  def parse_sig(node); end
-
-  # source://rbi//lib/rbi/parser.rb#432
-  sig { params(node: ::AST::Node).returns(::RBI::Struct) }
-  def parse_struct(node); end
-
-  # source://rbi//lib/rbi/parser.rb#489
-  sig { params(node: ::AST::Node).returns([::String, ::String, T.nilable(::String)]) }
-  def parse_tstruct_prop(node); end
-
-  # source://rbi//lib/rbi/parser.rb#478
-  sig { params(node: ::AST::Node).returns(::RBI::TypeMember) }
-  def parse_type_variable(node); end
-
-  # source://rbi//lib/rbi/parser.rb#591
-  sig { void }
-  def separate_header_comments; end
-
-  # source://rbi//lib/rbi/parser.rb#613
-  sig { void }
-  def set_root_tree_loc; end
-
-  # source://rbi//lib/rbi/parser.rb#426
-  sig { params(node: ::AST::Node).returns(T::Boolean) }
-  def struct_definition?(node); end
-
-  # source://rbi//lib/rbi/parser.rb#471
-  sig { params(node: ::AST::Node).returns(T::Boolean) }
-  def type_variable_definition?(node); end
 end
 
 # source://rbi//lib/rbi/model.rb#1320
