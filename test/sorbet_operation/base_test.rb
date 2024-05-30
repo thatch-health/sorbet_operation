@@ -19,7 +19,7 @@ class BaseTest < Minitest::Test
       @divisor = divisor
     end
 
-    protected
+    private
 
     sig { override.returns(Float) }
     def execute

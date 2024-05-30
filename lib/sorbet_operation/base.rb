@@ -57,7 +57,7 @@ module SorbetOperation
     sig { params(logger: ::Logger).void }
     attr_writer :logger
 
-    protected
+    private
 
     # Implement this method in subclasses to perform the operation.
     #
@@ -70,7 +70,7 @@ module SorbetOperation
     # exception. The exception will not be caught and will be propagated to
     # the caller.
     #
-    # This method should be declared as `protected` in subclasses to prevent
+    # This method should be declared as `private` in subclasses to prevent
     # callers from calling it directly. Callers should instead call {#perform}
     # to perform the operation and get the result.
     sig { abstract.returns(ValueType) }

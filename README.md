@@ -18,7 +18,7 @@ class CreateUser < SorbetOperation::Base
     @user_params = user_params
   end
 
-  protected
+  private
 
   sig { returns(ValueType) }
   def execute
@@ -71,7 +71,7 @@ An operation is a Ruby class that derives from `SorbetOperation::Base`. `SorbetO
 1. define the return type using the `ValueType` generic type member
 2. define an `#execute` method that returns a `ValueType`
 
-The `#execute` method should be `protected` or `private`, since it is not meant to be invoked directly; rather, operation callers should use the `#perform` public method to actually perform the operation. (Unfortunately, at this time there is no mechanism to enforce that `#execute` is not a public method on child classes, so it's up to the programmer to be vigilant.)
+The `#execute` method should be `private`, since it is not meant to be invoked directly; rather, operation callers should use the `#perform` public method to actually perform the operation. (Unfortunately, at this time there is no mechanism to enforce that `#execute` is not a public method on child classes, so it's up to the programmer to be vigilant.)
 
 The `#execute` method does not take any arguments. Most operations require one or more input values. Input values should be passed to the `#initialize` constructor method and stored as instance variables, which can then be accessed from the `#execute` body.
 
