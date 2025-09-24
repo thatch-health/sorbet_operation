@@ -24,18 +24,32 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy_yard:
-    # the deploy environment (not to be confused with env)
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Generate YARD documentation
+        run: |
+          bundle exec yard doc
+
+      - name: Upload pages artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: doc/
+
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    name: Build and deploy YARD
+    needs: build
     steps:
-      - uses: kachick/deploy-yard-to-pages@v1.3.0
+      - name: Deploy to GitHub Pages
         id: deployment
-        # with:
-          # # default `doc` as default of `.yardopts`
-          # output-dir: 'docs'
-          # # default version is 3.2
-          # ruby-version: '3.2'
+        uses: actions/deploy-pages@v4
