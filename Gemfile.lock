@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sorbet_operation (0.1.2)
+    sorbet_operation (0.1.3)
       sorbet-runtime (~> 0.5.10741)
 
 GEM
@@ -216,7 +216,7 @@ CHECKSUMS
   sorbet-static (0.5.12443-universal-darwin) sha256=99d0b9d5371ec9d449880154008d8b0aa1854c646ff83cdf1d7a29cda978d494
   sorbet-static (0.5.12443-x86_64-linux) sha256=92915e823d312af2bd958f0700e529b5afd041492c6527198a2b60045f5a9e98
   sorbet-static-and-runtime (0.5.12443) sha256=88ddf016cb6f238b14cc3c6d5324299e45f5957c9b1bae9c9509f864272ae2ea
-  sorbet_operation (0.1.2)
+  sorbet_operation (0.1.3)
   spoom (1.6.3) sha256=0d05a501a643a2e3cb75357583fcd0a400e92e05cd05a1bf1a08cda6d321d153
   stringio (3.1.7) sha256=5b78b7cb242a315fb4fca61a8255d62ec438f58da2b90be66048546ade4507fa
   tapioca (0.16.11) sha256=beeb388a5e2022ef8880cd24f57bc2acb59b65a4d5a6aa59bc1f10bc7b1eb1f7
