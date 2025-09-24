@@ -35775,8 +35775,8 @@ end
 # source://prism//lib/prism/translation/parser.rb#40
 Prism::Translation::Parser::Racc_debug_parser = T.let(T.unsafe(nil), FalseClass)
 
-# source://prism//lib/prism/translation/parser_current.rb#10
-Prism::Translation::ParserCurrent = Prism::Translation::Parser33
+# source://prism//lib/prism/translation/parser_current.rb#12
+Prism::Translation::ParserCurrent = Prism::Translation::Parser34
 
 # This class provides a compatibility layer between prism and Ripper. It
 # functions by parsing the entire tree first and then walking it and
