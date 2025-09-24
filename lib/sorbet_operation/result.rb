@@ -192,6 +192,8 @@ module SorbetOperation
     # runtime error if `ValueType` is nilable and `@value` is `nil`.
     #
     # There's probably a better way to handle this.
+    #
+    # @private
     sig { returns(ValueType) }
     def casted_value
       T.cast(@value, ValueType)
