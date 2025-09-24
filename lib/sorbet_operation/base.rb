@@ -38,16 +38,16 @@ module SorbetOperation
     # Performs the operation and returns the result.
     sig { returns(Result[ValueType]) }
     def perform
-      logger.debug("Performing operation #{self.class.name}")
+      logger.debug { "Performing operation #{self.class.name}" }
 
       begin
         value = execute
       rescue Failure => e
-        logger.debug("Operation #{self.class.name} failed, failure = #{e.inspect}")
+        logger.debug { "Operation #{self.class.name} failed, failure = #{e.inspect}" }
 
         Result.new(false, nil, e)
       else
-        logger.debug("Operation #{self.class.name} succeeded, return value = #{value.inspect}")
+        logger.debug { "Operation #{self.class.name} succeeded, return value = #{value.inspect}" }
 
         Result.new(true, value, nil)
       end
