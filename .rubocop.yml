@@ -6,6 +6,7 @@ require:
   - rubocop-minitest
   - rubocop-performance
   - rubocop-rake
+  - rubocop-rails
   - rubocop-sorbet
 
 AllCops:
@@ -14,6 +15,9 @@ AllCops:
   TargetRubyVersion: 3.0
 
 Minitest/MultipleAssertions:
+  Enabled: false
+
+Rails/RefuteMethods:
   Enabled: false
 
 Sorbet/StrictSigil:
