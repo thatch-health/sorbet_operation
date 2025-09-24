@@ -7,7 +7,9 @@ gemspec
 
 gem "rake", "~> 13.0"
 
+gem "benchmark" # for Ruby >= 3.5
 gem "bigdecimal" # for Ruby >= 3.4
+gem "ostruct" # for Ruby >= 3.5
 
 group :development, :test do
   gem "irb"
