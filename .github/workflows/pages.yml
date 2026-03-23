@@ -1,35 +1,36 @@
 name: Deploy Yard docs to GitHub Pages
 on:
   push:
-    branches: ['main']
+    branches: ["main"]
     paths:
-      - '.github/workflows/pages.yml'
-      - '.yardopts'
-      - 'lib/**'
-      - '**.gemspec'
-      - 'Gemfile'
-      - '**.md'
-      - '**.txt'
+      - ".github/workflows/pages.yml"
+      - ".yardopts"
+      - "lib/**"
+      - "**.gemspec"
+      - "Gemfile"
+      - "**.md"
+      - "**.txt"
     # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # Allow one concurrent deployment
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
   build:
+    name: Build documentation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@319994f95fa847cf3fb3cd3dbe89f6dcde9f178f # v1.295.0
         with:
           bundler-cache: true
 
@@ -39,11 +40,15 @@ jobs:
 
       - name: Upload pages artifact
         id: deployment
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4.0.0
         with:
           path: doc/
 
   deploy:
+    name: Deploy to GitHub Pages
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -52,4 +57,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
