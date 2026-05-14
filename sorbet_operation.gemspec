@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
     "ensure that operations are well-typed and that their inputs and outputs are well-defined."
   spec.homepage = "https://github.com/thatch-health/sorbet_operation"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.0.0"
+  spec.required_ruby_version = ">= 3.3.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
