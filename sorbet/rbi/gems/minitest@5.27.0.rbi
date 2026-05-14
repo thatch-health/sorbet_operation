@@ -7,6 +7,7 @@
 
 # The top-level namespace for Minitest. Also the location of the main
 # runtime. See +Minitest.run+ for more information.
+# :stopdoc:
 #
 # pkg:gem/minitest#lib/minitest/parallel.rb:3
 module Minitest
@@ -131,14 +132,10 @@ end
 #
 # pkg:gem/minitest#lib/minitest.rb:702
 class Minitest::AbstractReporter
-  # @return [AbstractReporter] a new instance of AbstractReporter
-  #
   # pkg:gem/minitest#lib/minitest.rb:704
   def initialize; end
 
   # Did this run pass?
-  #
-  # @return [Boolean]
   #
   # pkg:gem/minitest#lib/minitest.rb:739
   def passed?; end
@@ -580,8 +577,6 @@ module Minitest::Assertions
   # gets listed at the end of the run but doesn't cause a failure
   # exit code.
   #
-  # @raise [Minitest::Skip]
-  #
   # pkg:gem/minitest#lib/minitest/assertions.rb:825
   def skip(msg = T.unsafe(nil), _ignored = T.unsafe(nil)); end
 
@@ -594,8 +589,6 @@ module Minitest::Assertions
   def skip_until(y, m, d, msg); end
 
   # Was this testcase skipped? Meant for #teardown.
-  #
-  # @return [Boolean]
   #
   # pkg:gem/minitest#lib/minitest/assertions.rb:846
   def skipped?; end
@@ -638,8 +631,6 @@ Minitest::Assertions::UNDEFINED = T.let(T.unsafe(nil), Object)
 #
 # pkg:gem/minitest#lib/minitest.rb:1190
 class Minitest::BacktraceFilter
-  # @return [BacktraceFilter] a new instance of BacktraceFilter
-  #
   # pkg:gem/minitest#lib/minitest.rb:1199
   def initialize(regexp = T.unsafe(nil)); end
 
@@ -667,8 +658,6 @@ Minitest::BacktraceFilter::MT_RE = T.let(T.unsafe(nil), Regexp)
 #
 # pkg:gem/minitest#lib/minitest.rb:984
 class Minitest::CompositeReporter < ::Minitest::AbstractReporter
-  # @return [CompositeReporter] a new instance of CompositeReporter
-  #
   # pkg:gem/minitest#lib/minitest.rb:990
   def initialize(*reporters); end
 
@@ -680,8 +669,6 @@ class Minitest::CompositeReporter < ::Minitest::AbstractReporter
   # pkg:gem/minitest#lib/minitest.rb:995
   def io; end
 
-  # @return [Boolean]
-  #
   # pkg:gem/minitest#lib/minitest.rb:1006
   def passed?; end
 
@@ -737,42 +724,30 @@ end
 module Minitest::Guard
   # Is this running on jruby?
   #
-  # @return [Boolean]
-  #
   # pkg:gem/minitest#lib/minitest.rb:1139
   def jruby?(platform = T.unsafe(nil)); end
 
   # Is this running on maglev?
-  #
-  # @return [Boolean]
   #
   # pkg:gem/minitest#lib/minitest.rb:1146
   def maglev?(platform = T.unsafe(nil)); end
 
   # Is this running on mri?
   #
-  # @return [Boolean]
-  #
   # pkg:gem/minitest#lib/minitest.rb:1156
   def mri?(platform = T.unsafe(nil)); end
 
   # Is this running on macOS?
-  #
-  # @return [Boolean]
   #
   # pkg:gem/minitest#lib/minitest.rb:1163
   def osx?(platform = T.unsafe(nil)); end
 
   # Is this running on rubinius?
   #
-  # @return [Boolean]
-  #
   # pkg:gem/minitest#lib/minitest.rb:1170
   def rubinius?(platform = T.unsafe(nil)); end
 
   # Is this running on windows?
-  #
-  # @return [Boolean]
   #
   # pkg:gem/minitest#lib/minitest.rb:1180
   def windows?(platform = T.unsafe(nil)); end
@@ -786,8 +761,6 @@ module Minitest::Parallel; end
 # pkg:gem/minitest#lib/minitest/parallel.rb:9
 class Minitest::Parallel::Executor
   # Create a parallel test executor of with +size+ workers.
-  #
-  # @return [Executor] a new instance of Executor
   #
   # pkg:gem/minitest#lib/minitest/parallel.rb:19
   def initialize(size); end
@@ -851,14 +824,10 @@ end
 #
 # pkg:gem/minitest#lib/minitest.rb:596
 module Minitest::Reportable
-  # @raise [NotImplementedError]
-  #
   # pkg:gem/minitest#lib/minitest.rb:618
   def class_name; end
 
   # Did this run error?
-  #
-  # @return [Boolean]
   #
   # pkg:gem/minitest#lib/minitest.rb:639
   def error?; end
@@ -874,8 +843,6 @@ module Minitest::Reportable
   # Note: skipped runs are not considered passing, but they don't
   # cause the process to exit non-zero.
   #
-  # @return [Boolean]
-  #
   # pkg:gem/minitest#lib/minitest.rb:603
   def passed?; end
 
@@ -886,8 +853,6 @@ module Minitest::Reportable
 
   # Was this run skipped?
   #
-  # @return [Boolean]
-  #
   # pkg:gem/minitest#lib/minitest.rb:632
   def skipped?; end
 end
@@ -897,10 +862,8 @@ Minitest::Reportable::BASE_DIR = T.let(T.unsafe(nil), String)
 
 # AbstractReportera
 #
-# pkg:gem/minitest#lib/minitest.rb:750
+# pkg:gem/minitest#lib/minitest.rb:748
 class Minitest::Reporter < ::Minitest::AbstractReporter
-  # @return [Reporter] a new instance of Reporter
-  #
   # pkg:gem/minitest#lib/minitest.rb:759
   def initialize(io = T.unsafe(nil), options = T.unsafe(nil)); end
 
@@ -969,12 +932,14 @@ class Minitest::Result < ::Minitest::Runnable
   end
 end
 
-# re-open
+# Represents anything "runnable", like Test, Spec, Benchmark, or
+# whatever you can dream up.
+#
+# Subclasses of this are automatically registered and available in
+# Runnable.runnables.
 #
 # pkg:gem/minitest#lib/minitest.rb:363
 class Minitest::Runnable
-  # @return [Runnable] a new instance of Runnable
-  #
   # pkg:gem/minitest#lib/minitest.rb:527
   def initialize(name); end
 
@@ -1014,17 +979,24 @@ class Minitest::Runnable
   # NOTE: this data *must* be plain (read: marshal-able) data!
   # Hashes! Arrays! Strings!
   #
+  # Sets metadata, mainly used for +Result.from+.
+  #
   # pkg:gem/minitest#lib/minitest.rb:542
   def metadata; end
 
+  # Metadata you attach to the test results that get sent to the reporter.
+  #
+  # Lazily initializes to a hash, to keep memory down.
+  #
+  # NOTE: this data *must* be plain (read: marshal-able) data!
+  # Hashes! Arrays! Strings!
+  #
   # Sets metadata, mainly used for +Result.from+.
   #
   # pkg:gem/minitest#lib/minitest.rb:549
   def metadata=(_arg0); end
 
   # Returns true if metadata exists.
-  #
-  # @return [Boolean]
   #
   # pkg:gem/minitest#lib/minitest.rb:554
   def metadata?; end
@@ -1044,9 +1016,6 @@ class Minitest::Runnable
   # Note: skipped runs are not considered passing, but they don't
   # cause the process to exit non-zero.
   #
-  # @raise [NotImplementedError]
-  # @return [Boolean]
-  #
   # pkg:gem/minitest#lib/minitest.rb:571
   def passed?; end
 
@@ -1054,22 +1023,15 @@ class Minitest::Runnable
   # of the run. One of <tt>"."</tt>, <tt>"F"</tt>,
   # <tt>"E"</tt> or <tt>"S"</tt>.
   #
-  # @raise [NotImplementedError]
-  #
   # pkg:gem/minitest#lib/minitest.rb:580
   def result_code; end
 
   # Runs a single method. Needs to return self.
   #
-  # @raise [NotImplementedError]
-  #
   # pkg:gem/minitest#lib/minitest.rb:561
   def run; end
 
   # Was this run skipped? See #passed? for more information.
-  #
-  # @raise [NotImplementedError]
-  # @return [Boolean]
   #
   # pkg:gem/minitest#lib/minitest.rb:587
   def skipped?; end
@@ -1088,6 +1050,8 @@ class Minitest::Runnable
   def time_it; end
 
   class << self
+    # re-open
+    #
     # pkg:gem/minitest#lib/minitest.rb:1241
     def inherited(klass); end
 
@@ -1119,8 +1083,6 @@ class Minitest::Runnable
 
     # Each subclass of Runnable is responsible for overriding this
     # method to return all runnable methods. See #methods_matching.
-    #
-    # @raise [NotImplementedError]
     #
     # pkg:gem/minitest#lib/minitest.rb:496
     def runnable_methods; end
@@ -1174,8 +1136,6 @@ end
 #
 # pkg:gem/minitest#lib/minitest.rb:810
 class Minitest::StatisticsReporter < ::Minitest::Reporter
-  # @return [StatisticsReporter] a new instance of StatisticsReporter
-  #
   # pkg:gem/minitest#lib/minitest.rb:859
   def initialize(io = T.unsafe(nil), options = T.unsafe(nil)); end
 
@@ -1219,8 +1179,6 @@ class Minitest::StatisticsReporter < ::Minitest::Reporter
   # pkg:gem/minitest#lib/minitest.rb:842
   def failures=(_arg0); end
 
-  # @return [Boolean]
-  #
   # pkg:gem/minitest#lib/minitest.rb:873
   def passed?; end
 
@@ -1376,15 +1334,9 @@ class Minitest::Test < ::Minitest::Runnable
     # pkg:gem/minitest#lib/minitest/test.rb:35
     def i_suck_and_my_tests_are_order_dependent!; end
 
-    # Returns the value of attribute io_lock.
-    #
     # pkg:gem/minitest#lib/minitest/test.rb:26
     def io_lock; end
 
-    # Sets the attribute io_lock
-    #
-    # @param value the value to set the attribute io_lock to.
-    #
     # pkg:gem/minitest#lib/minitest/test.rb:26
     def io_lock=(_arg0); end
 
@@ -1509,8 +1461,6 @@ Minitest::Test::TEARDOWN_METHODS = T.let(T.unsafe(nil), Array)
 class Minitest::UnexpectedError < ::Minitest::Assertion
   include ::Minitest::Compress
 
-  # @return [UnexpectedError] a new instance of UnexpectedError
-  #
   # pkg:gem/minitest#lib/minitest.rb:1080
   def initialize(error); end
 
