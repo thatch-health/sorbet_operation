@@ -403,7 +403,7 @@ class OpenStruct
   def to_h!(&block); end
 
   # pkg:gem/ostruct#lib/ostruct.rb:481
-  def to_json!(state = T.unsafe(nil), *_arg1); end
+  def to_json!(state = T.unsafe(nil), *); end
 
   # pkg:gem/ostruct#lib/ostruct.rb:407
   def to_s; end
