@@ -5,6 +5,9 @@
 # Please instead update this file by running `bin/tapioca gem yard`.
 
 
+# Keep track of Ruby version for compatibility code
+# @deprecated Use {YARD.ruby18?} or {YARD.ruby19?} instead.
+#
 # pkg:gem/yard#lib/yard.rb:61
 ::RUBY18 = T.let(T.unsafe(nil), FalseClass)
 
@@ -2239,7 +2242,7 @@ class YARD::CodeObjects::Base
   # @return [Base] the newly created object
   #
   # pkg:gem/yard#lib/yard/code_objects/base.rb:238
-  def initialize(namespace, name, *_arg2); end
+  def initialize(namespace, name, *); end
 
   # pkg:gem/yard#lib/yard/code_objects/base.rb:330
   def ==(other); end
@@ -4806,7 +4809,7 @@ class YARD::Handlers::Base
   # @abstract Subclasses should call {Processor#process parser.process}
   #
   # pkg:gem/yard#lib/yard/handlers/base.rb:304
-  def parse_block(*_arg0); end
+  def parse_block(*); end
 
   # @return [Processor] the processor object that manages all global state
   #   during handling.
@@ -12810,8 +12813,6 @@ module YARD::Server::HTTPUtils
     # pkg:gem/yard#lib/yard/server/http_utils.rb:449
     def _unescape(str, regex); end
 
-    # Removes quotes and escapes from +str+
-    #
     # pkg:gem/yard#lib/yard/server/http_utils.rb:228
     def dequote(str); end
 
@@ -12835,56 +12836,33 @@ module YARD::Server::HTTPUtils
     # pkg:gem/yard#lib/yard/server/http_utils.rb:497
     def escape_path(str); end
 
-    # Loads Apache-compatible mime.types in +file+.
-    #
     # pkg:gem/yard#lib/yard/server/http_utils.rb:128
     def load_mime_types(file); end
 
-    # Returns the mime type of +filename+ from the list in +mime_tab+.  If no
-    # mime type was found application/octet-stream is returned.
-    #
     # pkg:gem/yard#lib/yard/server/http_utils.rb:139
     def mime_type(filename, mime_tab); end
 
-    # Normalizes a request path.  Raises an exception if the path cannot be
-    # normalized.
-    #
     # pkg:gem/yard#lib/yard/server/http_utils.rb:42
     def normalize_path(path); end
 
-    # Parses form data in +io+ with the given +boundary+
-    #
     # pkg:gem/yard#lib/yard/server/http_utils.rb:421
     def parse_form_data(io, boundary); end
 
-    # Parses an HTTP header +raw+ into a hash of header fields with an Array
-    # of values.
-    #
     # pkg:gem/yard#lib/yard/server/http_utils.rb:170
     def parse_header(raw); end
 
-    # Parses the query component of a URI in +str+
-    #
     # pkg:gem/yard#lib/yard/server/http_utils.rb:390
     def parse_query(str); end
 
-    # Parses q values in +value+ as used in Accept headers.
-    #
     # pkg:gem/yard#lib/yard/server/http_utils.rb:218
     def parse_qvalues(value); end
 
-    # Parses a Range header value +ranges_specifier+
-    #
     # pkg:gem/yard#lib/yard/server/http_utils.rb:197
     def parse_range_header(ranges_specifier); end
 
-    # Quotes and escapes quotes in +str+
-    #
     # pkg:gem/yard#lib/yard/server/http_utils.rb:236
     def quote(str); end
 
-    # Splits a header value +str+ according to HTTP specification.
-    #
     # pkg:gem/yard#lib/yard/server/http_utils.rb:179
     def split_header_value(str); end
 
@@ -15553,11 +15531,6 @@ module YARD::Templates::Helpers::HtmlHelper
   def urlencode(text); end
 
   class << self
-    # Escapes a URL
-    #
-    # @param [String] text the URL
-    # @return [String] the escaped URL
-    #
     # pkg:gem/yard#lib/yard/templates/helpers/html_helper.rb:51
     def urlencode(text); end
   end

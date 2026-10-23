@@ -656,412 +656,412 @@ module RuboCop::AST::CollectionNode
   extend ::RuboCop::SimpleForwardable
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def &(*_arg0, **_arg1, &_arg2); end
+  def &(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def *(*_arg0, **_arg1, &_arg2); end
+  def *(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def +(*_arg0, **_arg1, &_arg2); end
+  def +(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def -(*_arg0, **_arg1, &_arg2); end
+  def -(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def <<(*_arg0, **_arg1, &_arg2); end
+  def <<(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def [](*_arg0, **_arg1, &_arg2); end
+  def [](*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def []=(*_arg0, **_arg1, &_arg2); end
+  def []=(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def all?(*_arg0, **_arg1, &_arg2); end
+  def all?(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def any?(*_arg0, **_arg1, &_arg2); end
+  def any?(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def append(*_arg0, **_arg1, &_arg2); end
+  def append(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def assoc(*_arg0, **_arg1, &_arg2); end
+  def assoc(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def at(*_arg0, **_arg1, &_arg2); end
+  def at(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def bsearch(*_arg0, **_arg1, &_arg2); end
+  def bsearch(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def bsearch_index(*_arg0, **_arg1, &_arg2); end
+  def bsearch_index(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def chain(*_arg0, **_arg1, &_arg2); end
+  def chain(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def chunk(*_arg0, **_arg1, &_arg2); end
+  def chunk(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def chunk_while(*_arg0, **_arg1, &_arg2); end
+  def chunk_while(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def clear(*_arg0, **_arg1, &_arg2); end
+  def clear(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def collect(*_arg0, **_arg1, &_arg2); end
+  def collect(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def collect!(*_arg0, **_arg1, &_arg2); end
+  def collect!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def collect_concat(*_arg0, **_arg1, &_arg2); end
+  def collect_concat(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def combination(*_arg0, **_arg1, &_arg2); end
+  def combination(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def compact(*_arg0, **_arg1, &_arg2); end
+  def compact(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def compact!(*_arg0, **_arg1, &_arg2); end
+  def compact!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def concat(*_arg0, **_arg1, &_arg2); end
+  def concat(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def count(*_arg0, **_arg1, &_arg2); end
+  def count(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def cycle(*_arg0, **_arg1, &_arg2); end
+  def cycle(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def deconstruct(*_arg0, **_arg1, &_arg2); end
+  def deconstruct(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def delete(*_arg0, **_arg1, &_arg2); end
+  def delete(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def delete_at(*_arg0, **_arg1, &_arg2); end
+  def delete_at(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def delete_if(*_arg0, **_arg1, &_arg2); end
+  def delete_if(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def detect(*_arg0, **_arg1, &_arg2); end
+  def detect(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def difference(*_arg0, **_arg1, &_arg2); end
+  def difference(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def dig(*_arg0, **_arg1, &_arg2); end
+  def dig(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def drop(*_arg0, **_arg1, &_arg2); end
+  def drop(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def drop_while(*_arg0, **_arg1, &_arg2); end
+  def drop_while(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def each(*_arg0, **_arg1, &_arg2); end
+  def each(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def each_cons(*_arg0, **_arg1, &_arg2); end
+  def each_cons(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def each_entry(*_arg0, **_arg1, &_arg2); end
+  def each_entry(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def each_index(*_arg0, **_arg1, &_arg2); end
+  def each_index(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def each_slice(*_arg0, **_arg1, &_arg2); end
+  def each_slice(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def each_with_index(*_arg0, **_arg1, &_arg2); end
+  def each_with_index(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def each_with_object(*_arg0, **_arg1, &_arg2); end
+  def each_with_object(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def empty?(*_arg0, **_arg1, &_arg2); end
+  def empty?(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def entries(*_arg0, **_arg1, &_arg2); end
+  def entries(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def fetch(*_arg0, **_arg1, &_arg2); end
+  def fetch(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def fetch_values(*_arg0, **_arg1, &_arg2); end
+  def fetch_values(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def fill(*_arg0, **_arg1, &_arg2); end
+  def fill(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def filter(*_arg0, **_arg1, &_arg2); end
+  def filter(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def filter!(*_arg0, **_arg1, &_arg2); end
+  def filter!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def filter_map(*_arg0, **_arg1, &_arg2); end
+  def filter_map(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def find(*_arg0, **_arg1, &_arg2); end
+  def find(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def find_all(*_arg0, **_arg1, &_arg2); end
+  def find_all(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def find_index(*_arg0, **_arg1, &_arg2); end
+  def find_index(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def first(*_arg0, **_arg1, &_arg2); end
+  def first(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def flat_map(*_arg0, **_arg1, &_arg2); end
+  def flat_map(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def flatten(*_arg0, **_arg1, &_arg2); end
+  def flatten(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def flatten!(*_arg0, **_arg1, &_arg2); end
+  def flatten!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def grep(*_arg0, **_arg1, &_arg2); end
+  def grep(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def grep_v(*_arg0, **_arg1, &_arg2); end
+  def grep_v(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def group_by(*_arg0, **_arg1, &_arg2); end
+  def group_by(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def include?(*_arg0, **_arg1, &_arg2); end
+  def include?(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def index(*_arg0, **_arg1, &_arg2); end
+  def index(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def inject(*_arg0, **_arg1, &_arg2); end
+  def inject(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def insert(*_arg0, **_arg1, &_arg2); end
+  def insert(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def intersect?(*_arg0, **_arg1, &_arg2); end
+  def intersect?(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def intersection(*_arg0, **_arg1, &_arg2); end
+  def intersection(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def join(*_arg0, **_arg1, &_arg2); end
+  def join(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def keep_if(*_arg0, **_arg1, &_arg2); end
+  def keep_if(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def last(*_arg0, **_arg1, &_arg2); end
+  def last(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def lazy(*_arg0, **_arg1, &_arg2); end
+  def lazy(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def length(*_arg0, **_arg1, &_arg2); end
+  def length(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def map(*_arg0, **_arg1, &_arg2); end
+  def map(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def map!(*_arg0, **_arg1, &_arg2); end
+  def map!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def max(*_arg0, **_arg1, &_arg2); end
+  def max(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def max_by(*_arg0, **_arg1, &_arg2); end
+  def max_by(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def member?(*_arg0, **_arg1, &_arg2); end
+  def member?(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def min(*_arg0, **_arg1, &_arg2); end
+  def min(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def min_by(*_arg0, **_arg1, &_arg2); end
+  def min_by(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def minmax(*_arg0, **_arg1, &_arg2); end
+  def minmax(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def minmax_by(*_arg0, **_arg1, &_arg2); end
+  def minmax_by(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def none?(*_arg0, **_arg1, &_arg2); end
+  def none?(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def one?(*_arg0, **_arg1, &_arg2); end
+  def one?(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def pack(*_arg0, **_arg1, &_arg2); end
+  def pack(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def partition(*_arg0, **_arg1, &_arg2); end
+  def partition(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def permutation(*_arg0, **_arg1, &_arg2); end
+  def permutation(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def pop(*_arg0, **_arg1, &_arg2); end
+  def pop(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def prepend(*_arg0, **_arg1, &_arg2); end
+  def prepend(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def product(*_arg0, **_arg1, &_arg2); end
+  def product(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def push(*_arg0, **_arg1, &_arg2); end
+  def push(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def rassoc(*_arg0, **_arg1, &_arg2); end
+  def rassoc(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def reduce(*_arg0, **_arg1, &_arg2); end
+  def reduce(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def reject(*_arg0, **_arg1, &_arg2); end
+  def reject(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def reject!(*_arg0, **_arg1, &_arg2); end
+  def reject!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def repeated_combination(*_arg0, **_arg1, &_arg2); end
+  def repeated_combination(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def repeated_permutation(*_arg0, **_arg1, &_arg2); end
+  def repeated_permutation(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def replace(*_arg0, **_arg1, &_arg2); end
+  def replace(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def reverse(*_arg0, **_arg1, &_arg2); end
+  def reverse(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def reverse!(*_arg0, **_arg1, &_arg2); end
+  def reverse!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def reverse_each(*_arg0, **_arg1, &_arg2); end
+  def reverse_each(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def rfind(*_arg0, **_arg1, &_arg2); end
+  def rfind(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def rindex(*_arg0, **_arg1, &_arg2); end
+  def rindex(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def rotate(*_arg0, **_arg1, &_arg2); end
+  def rotate(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def rotate!(*_arg0, **_arg1, &_arg2); end
+  def rotate!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def sample(*_arg0, **_arg1, &_arg2); end
+  def sample(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def select(*_arg0, **_arg1, &_arg2); end
+  def select(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def select!(*_arg0, **_arg1, &_arg2); end
+  def select!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def shelljoin(*_arg0, **_arg1, &_arg2); end
+  def shelljoin(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def shift(*_arg0, **_arg1, &_arg2); end
+  def shift(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def shuffle(*_arg0, **_arg1, &_arg2); end
+  def shuffle(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def shuffle!(*_arg0, **_arg1, &_arg2); end
+  def shuffle!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def size(*_arg0, **_arg1, &_arg2); end
+  def size(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def slice(*_arg0, **_arg1, &_arg2); end
+  def slice(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def slice!(*_arg0, **_arg1, &_arg2); end
+  def slice!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def slice_after(*_arg0, **_arg1, &_arg2); end
+  def slice_after(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def slice_before(*_arg0, **_arg1, &_arg2); end
+  def slice_before(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def slice_when(*_arg0, **_arg1, &_arg2); end
+  def slice_when(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def sort(*_arg0, **_arg1, &_arg2); end
+  def sort(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def sort!(*_arg0, **_arg1, &_arg2); end
+  def sort!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def sort_by(*_arg0, **_arg1, &_arg2); end
+  def sort_by(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def sort_by!(*_arg0, **_arg1, &_arg2); end
+  def sort_by!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def sum(*_arg0, **_arg1, &_arg2); end
+  def sum(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def take(*_arg0, **_arg1, &_arg2); end
+  def take(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def take_while(*_arg0, **_arg1, &_arg2); end
+  def take_while(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def tally(*_arg0, **_arg1, &_arg2); end
+  def tally(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def to_ary(*_arg0, **_arg1, &_arg2); end
+  def to_ary(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def to_h(*_arg0, **_arg1, &_arg2); end
+  def to_h(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def to_set(*_arg0, **_arg1, &_arg2); end
+  def to_set(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def transpose(*_arg0, **_arg1, &_arg2); end
+  def transpose(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def union(*_arg0, **_arg1, &_arg2); end
+  def union(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def uniq(*_arg0, **_arg1, &_arg2); end
+  def uniq(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def uniq!(*_arg0, **_arg1, &_arg2); end
+  def uniq!(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def unshift(*_arg0, **_arg1, &_arg2); end
+  def unshift(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def values_at(*_arg0, **_arg1, &_arg2); end
+  def values_at(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def zip(*_arg0, **_arg1, &_arg2); end
+  def zip(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:13
-  def |(*_arg0, **_arg1, &_arg2); end
+  def |(*, **, &); end
 end
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node/mixin/collection_node.rb:9
@@ -3693,7 +3693,7 @@ class RuboCop::AST::NodePattern
   def ast; end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern.rb:76
-  def captures(*_arg0, **_arg1, &_arg2); end
+  def captures(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern.rb:112
   def encode_with(coder); end
@@ -3720,13 +3720,13 @@ class RuboCop::AST::NodePattern
   def match_code; end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern.rb:76
-  def named_parameters(*_arg0, **_arg1, &_arg2); end
+  def named_parameters(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern.rb:74
   def pattern; end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern.rb:76
-  def positional_parameters(*_arg0, **_arg1, &_arg2); end
+  def positional_parameters(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern.rb:96
   def to_s; end
@@ -3828,7 +3828,7 @@ class RuboCop::AST::NodePattern::Compiler
   def initialize; end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/compiler.rb:25
-  def bind(*_arg0, **_arg1, &_arg2); end
+  def bind(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/compiler.rb:14
   def binding; end
@@ -3969,7 +3969,7 @@ class RuboCop::AST::NodePattern::Compiler::Debug < ::RuboCop::AST::NodePattern::
   def initialize; end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/compiler/debug.rb:131
-  def comments(*_arg0, **_arg1, &_arg2); end
+  def comments(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/compiler/debug.rb:123
   def named_parameters; end
@@ -3981,7 +3981,7 @@ class RuboCop::AST::NodePattern::Compiler::Debug < ::RuboCop::AST::NodePattern::
   def parser; end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/compiler/debug.rb:131
-  def tokens(*_arg0, **_arg1, &_arg2); end
+  def tokens(*, **, &); end
 end
 
 # @api private
@@ -4757,7 +4757,7 @@ RuboCop::AST::NodePattern::Node::AnyOrder::ARITIES = T.let(T.unsafe(nil), Hash)
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/node.rb:96
 class RuboCop::AST::NodePattern::Node::Capture < ::RuboCop::AST::NodePattern::Node
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/node.rb:98
-  def arity(*_arg0, **_arg1, &_arg2); end
+  def arity(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/node.rb:100
   def capture?; end
@@ -4769,7 +4769,7 @@ class RuboCop::AST::NodePattern::Node::Capture < ::RuboCop::AST::NodePattern::No
   def nb_captures; end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/node.rb:98
-  def rest?(*_arg0, **_arg1, &_arg2); end
+  def rest?(*, **, &); end
 end
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/node.rb:85
@@ -5002,28 +5002,28 @@ class RuboCop::AST::NodePattern::Parser < ::Racc::Parser
   def _reduce_none(val, _values); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/parser.rb:46
-  def emit_atom(*_arg0, **_arg1, &_arg2); end
+  def emit_atom(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/parser.rb:46
-  def emit_call(*_arg0, **_arg1, &_arg2); end
+  def emit_call(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/parser.rb:46
-  def emit_capture(*_arg0, **_arg1, &_arg2); end
+  def emit_capture(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/parser.rb:46
-  def emit_list(*_arg0, **_arg1, &_arg2); end
+  def emit_list(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/parser.rb:46
-  def emit_unary_op(*_arg0, **_arg1, &_arg2); end
+  def emit_unary_op(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/parser.rb:46
-  def emit_union(*_arg0, **_arg1, &_arg2); end
+  def emit_union(*, **, &); end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/parser.rb:40
   def inspect; end
 
   # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/parser.rb:48
-  def next_token(*_arg0, **_arg1, &_arg2); end
+  def next_token(*, **, &); end
 
   # (Similar API to `parser` gem)
   # Parses a source and returns the AST.
@@ -5177,6 +5177,9 @@ RuboCop::AST::NodePattern::Sets::SET_ANY_NONE = T.let(T.unsafe(nil), Set)
 RuboCop::AST::NodePattern::Sets::SET_ARRAY_HASH = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
+RuboCop::AST::NodePattern::Sets::SET_ARRAY_HASH_SET_ETC = T.let(T.unsafe(nil), Set)
+
+# pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
 RuboCop::AST::NodePattern::Sets::SET_ATTR_READER_ATTR_WRITER_ATTR_ACCESSOR = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
@@ -5291,9 +5294,6 @@ RuboCop::AST::NodePattern::Sets::SET_IF_UNLESS = T.let(T.unsafe(nil), Set)
 RuboCop::AST::NodePattern::Sets::SET_INCLUDE_EXTEND_PREPEND = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
-RuboCop::AST::NodePattern::Sets::SET_INCLUDE_MEMBER = T.let(T.unsafe(nil), Set)
-
-# pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
 RuboCop::AST::NodePattern::Sets::SET_INCLUDE_PREPEND = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
@@ -5324,6 +5324,9 @@ RuboCop::AST::NodePattern::Sets::SET_LAMBDA_PROC = T.let(T.unsafe(nil), Set)
 RuboCop::AST::NodePattern::Sets::SET_LAST_FIRST = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
+RuboCop::AST::NodePattern::Sets::SET_LAZY_CHAIN = T.let(T.unsafe(nil), Set)
+
+# pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
 RuboCop::AST::NodePattern::Sets::SET_LENGTH_SIZE = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
@@ -5345,10 +5348,10 @@ RuboCop::AST::NodePattern::Sets::SET_MATCH_MATCH_ = T.let(T.unsafe(nil), Set)
 RuboCop::AST::NodePattern::Sets::SET_MATCH_MATCH__2 = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
-RuboCop::AST::NodePattern::Sets::SET_MATCH___MATCH = T.let(T.unsafe(nil), Set)
+RuboCop::AST::NodePattern::Sets::SET_MAX_BY_MIN_BY_MINMAX_BY = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
-RuboCop::AST::NodePattern::Sets::SET_MAX_BY_MIN_BY_MINMAX_BY = T.let(T.unsafe(nil), Set)
+RuboCop::AST::NodePattern::Sets::SET_MEMBER_INCLUDE = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
 RuboCop::AST::NodePattern::Sets::SET_MODULE_FUNCTION_RUBY2_KEYWORDS = T.let(T.unsafe(nil), Set)
@@ -5367,6 +5370,12 @@ RuboCop::AST::NodePattern::Sets::SET_NIL_ = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
 RuboCop::AST::NodePattern::Sets::SET_PIPELINE_PIPELINE_R_PIPELINE_RW_ETC = T.let(T.unsafe(nil), Set)
+
+# pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
+RuboCop::AST::NodePattern::Sets::SET_POSITIVE_ZERO = T.let(T.unsafe(nil), Set)
+
+# pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
+RuboCop::AST::NodePattern::Sets::SET_PRIVATE_CLASS_METHOD_PUBLIC_CLASS_METHOD = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
 RuboCop::AST::NodePattern::Sets::SET_PRIVATE_PROTECTED_PRIVATE_CLASS_METHOD = T.let(T.unsafe(nil), Set)
@@ -5426,6 +5435,9 @@ RuboCop::AST::NodePattern::Sets::SET_SET_SORTEDSET = T.let(T.unsafe(nil), Set)
 RuboCop::AST::NodePattern::Sets::SET_SIG_HELPERS = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
+RuboCop::AST::NodePattern::Sets::SET_SILENCE_REDEFINITION_OF_METHOD_REDEFINE_METHOD = T.let(T.unsafe(nil), Set)
+
+# pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
 RuboCop::AST::NodePattern::Sets::SET_SORT_BY_SORT = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
@@ -5474,6 +5486,9 @@ RuboCop::AST::NodePattern::Sets::SET_TO_I_TO_F_TO_C_TO_R = T.let(T.unsafe(nil), 
 RuboCop::AST::NodePattern::Sets::SET_TRUE_FALSE = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
+RuboCop::AST::NodePattern::Sets::SET_TYPE_MEMBER_TYPE_TEMPLATE = T.let(T.unsafe(nil), Set)
+
+# pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
 RuboCop::AST::NodePattern::Sets::SET_ZERO_POSITIVE_NEGATIVE = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
@@ -5504,6 +5519,9 @@ RuboCop::AST::NodePattern::Sets::SET__PUSH_APPEND = T.let(T.unsafe(nil), Set)
 RuboCop::AST::NodePattern::Sets::SET___ = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
+RuboCop::AST::NodePattern::Sets::SET___10 = T.let(T.unsafe(nil), Set)
+
+# pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
 RuboCop::AST::NodePattern::Sets::SET___2 = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
@@ -5528,6 +5546,9 @@ RuboCop::AST::NodePattern::Sets::SET___8 = T.let(T.unsafe(nil), Set)
 RuboCop::AST::NodePattern::Sets::SET___9 = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
+RuboCop::AST::NodePattern::Sets::SET___MATCH_MATCH = T.let(T.unsafe(nil), Set)
+
+# pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
 RuboCop::AST::NodePattern::Sets::SET___METHOD_____CALLEE__ = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
@@ -5544,9 +5565,6 @@ RuboCop::AST::NodePattern::Sets::SET____ETC_2 = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
 RuboCop::AST::NodePattern::Sets::SET____ETC_3 = T.let(T.unsafe(nil), Set)
-
-# pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
-RuboCop::AST::NodePattern::Sets::SET____ETC_4 = T.let(T.unsafe(nil), Set)
 
 # pkg:gem/rubocop-ast#lib/rubocop/ast/node_pattern/sets.rb:10
 RuboCop::AST::NodePattern::Sets::SET_____2 = T.let(T.unsafe(nil), Set)
