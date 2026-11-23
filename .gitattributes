@@ -6,3 +6,7 @@
 sorbet/rbi/annotations/** linguist-generated
 sorbet/rbi/dsl/** linguist-generated
 sorbet/rbi/gems/** linguist-generated
+
+# Mark mise lockfiles as generated.
+mise.lock linguist-generated
+.mise/locks/** linguist-generated

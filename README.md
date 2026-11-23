@@ -98,9 +98,13 @@ ValueType = { { fixed: NilClass } }
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+This repo uses [mise](https://mise.jdx.dev) to install Ruby. After checking out the repo, run `mise trust` and `mise install` to get the Ruby version pinned in `.ruby-version`, then run `bin/setup` to install dependencies. Then, run `bin/rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bin/rake install`. To release a new version, update the version number in `version.rb`, and then run `bin/rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+### Bumping Ruby
+
+Change the version in `.ruby-version`, run `mise lock` then `mise install`, and commit the changes to `mise.lock`.
 
 ## Contributing
 
